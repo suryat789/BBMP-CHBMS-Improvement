@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bms-producer
+  namespace: bbmp
+spec:
+  ports:
+    - name: http
+      port: 8090
+      protocol: TCP
+  sessionAffinity: ClientIP
+  type: ClusterIP
+  selector:
+    app: bms-producer

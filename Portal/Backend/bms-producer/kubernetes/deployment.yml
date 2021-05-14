@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bms-producer
+  namespace: bbmp
+  labels:
+    app: bms-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bms-producer
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: bms-producer
+    spec:
+      containers:
+        - name: bms-producer
+          image: DOCKER_IMAGE_REGISTRY
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: producer-config-map
+            - secretRef:
+                name: producer-secret
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          ports:
+            - name: http
+              containerPort: 8090
+          readinessProbe:
+            httpGet:
+              path: /management/health
+              port: 8089
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            failureThreshold: 6
+      restartPolicy: Always
+      serviceAccountName: ''
+      volumes: null
+status: {}

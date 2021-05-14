@@ -1,0 +1,6 @@
+kind: Namespace
+metadata:
+  name: bbmp
+  labels:
+    app.kubernetes.io/name: bbmp
+    app.kubernetes.io/instance: bbmp

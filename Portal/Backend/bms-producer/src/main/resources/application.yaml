@@ -1,0 +1,44 @@
+springfox:
+  documentation:
+    open-api:
+      v3:
+        path: /api-docs
+logging:
+  level:
+    com:
+      azure: ERROR
+management:
+  server:
+    port: 8089
+  endpoints:
+    web:
+      base-path: /management
+server:
+  port: 8090
+  servlet:
+    contextPath: /gok/bms/1.0.0
+spring:
+  jackson:
+    date-format: com.infy.stg.RFC3339DateFormat
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  cloud:
+    azure:
+      eventhub:
+        connection-string: ${SPRING_CLOUD_AZURE_EVENTHUB_CONNECTION_STRING:defaults}
+        checkpoint-storage-account: ${SPRING_CLOUD_AZURE_CHECKPOINT_STORAGE_ACCOUNT:defaults}
+        checkpoint-access-key: ${SPRING_CLOUD_AZURE_CHECKPOINT_ACCESS_KEY:defaults}
+
+
+    stream:
+      bindings:
+        patientProducer-out-0:
+          destination: ${SPRING_CLOUD_STREAM_PATIENT_DESTINATION:patient}
+        hospitalProducer-out-0:
+          destination: ${SPRING_CLOUD_STREAM_HOSPITAL_DESTINATION:hospital}
+
+      function:
+        definition: patientProducer;hospitalProducer
+      poller:
+        initial-delay: 0
+        fixed-delay: 1000

@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: producer-config-map
+  namespace: bbmp
+data:
+  SPRING_CLOUD_AZURE_CHECKPOINT_STORAGE_ACCOUNT:
+  SPRING_CLOUD_STREAM_PATIENT_DESTINATION:
+  SPRING_CLOUD_STREAM_HOSPITAL_DESTINATION:
