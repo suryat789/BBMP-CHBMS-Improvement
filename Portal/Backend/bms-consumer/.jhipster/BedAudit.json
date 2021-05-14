@@ -1,0 +1,61 @@
+{
+  "name": "BedAudit",
+  "fields": [
+    {
+      "fieldName": "hospitalId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bedId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "capacity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "occupied",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "blocked",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "vacant",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedByMsgId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditedOn",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210513061112",
+  "entityTableName": "bed_audit",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,96 @@
+entity Patient {
+    patientId String
+    phone String
+    srfNumber String
+    bucode String
+    category String
+    zone String
+    queueType String
+    queueName String
+    timeAddedToQueue Instant
+    createdOn Instant
+    updatedOn Instant
+    updatedByMsgId String
+}
+
+entity Hospital {
+    hospitalId String
+    type String
+    name String
+    address String
+    pincode Long
+    phone String
+    zone String
+    status String
+    createdOn Instant
+    updatedOn Instant
+    updatedByMsgId String
+}
+
+entity Bed {
+    bedId String
+    type String
+    capacity Integer
+    occupied Integer
+    blocked Integer
+    vacant Integer
+    createdOn Instant
+    updatedOn Instant
+  	updatedByMsgId String
+}
+
+relationship ManyToOne{
+    Bed to Hospital{id}
+}
+
+entity PatientAudit {
+    patientId String
+    phone String
+    srfNumber String
+    bucode String
+    category String
+    zone String
+    queueType String
+    queueName String
+    timeAddedToQueue Instant
+    createdOn Instant
+    updatedOn Instant
+    updatedByMsgId String
+    auditedOn Instant
+}
+
+entity HospitalAudit {
+    hospitalId String
+    type String
+    name String
+    address String
+    pincode Long
+    phone String
+    zone String
+    status String
+    createdOn Instant
+    updatedOn Instant
+    updatedByMsgId String
+    auditedOn Instant
+}
+
+entity BedAudit {
+    hospitalId String
+    bedId String
+    type String
+    capacity Integer
+    occupied Integer
+    blocked Integer
+    vacant Integer
+    createdOn Instant
+    updatedOn Instant
+  	updatedByMsgId String
+    auditedOn Instant
+}
+
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

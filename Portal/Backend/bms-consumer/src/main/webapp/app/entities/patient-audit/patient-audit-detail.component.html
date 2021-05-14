@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="patientAudit">
+            <h2><span>Patient Audit</span> {{ patientAudit.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Patient Id</span></dt>
+                <dd>
+                    <span>{{ patientAudit.patientId }}</span>
+                </dd>
+                <dt><span>Phone</span></dt>
+                <dd>
+                    <span>{{ patientAudit.phone }}</span>
+                </dd>
+                <dt><span>Srf Number</span></dt>
+                <dd>
+                    <span>{{ patientAudit.srfNumber }}</span>
+                </dd>
+                <dt><span>Bucode</span></dt>
+                <dd>
+                    <span>{{ patientAudit.bucode }}</span>
+                </dd>
+                <dt><span>Category</span></dt>
+                <dd>
+                    <span>{{ patientAudit.category }}</span>
+                </dd>
+                <dt><span>Zone</span></dt>
+                <dd>
+                    <span>{{ patientAudit.zone }}</span>
+                </dd>
+                <dt><span>Queue Type</span></dt>
+                <dd>
+                    <span>{{ patientAudit.queueType }}</span>
+                </dd>
+                <dt><span>Queue Name</span></dt>
+                <dd>
+                    <span>{{ patientAudit.queueName }}</span>
+                </dd>
+                <dt><span>Time Added To Queue</span></dt>
+                <dd>
+                    <span>{{ patientAudit.timeAddedToQueue }}</span>
+                </dd>
+                <dt><span>Created On</span></dt>
+                <dd>
+                    <span>{{ patientAudit.createdOn }}</span>
+                </dd>
+                <dt><span>Updated On</span></dt>
+                <dd>
+                    <span>{{ patientAudit.updatedOn }}</span>
+                </dd>
+                <dt><span>Updated By Msg Id</span></dt>
+                <dd>
+                    <span>{{ patientAudit.updatedByMsgId }}</span>
+                </dd>
+                <dt><span>Audited On</span></dt>
+                <dd>
+                    <span>{{ patientAudit.auditedOn }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/patient-audit', patientAudit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

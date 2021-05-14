@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="patient">
+            <h2><span>Patient</span> {{ patient.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Patient Id</span></dt>
+                <dd>
+                    <span>{{ patient.patientId }}</span>
+                </dd>
+                <dt><span>Phone</span></dt>
+                <dd>
+                    <span>{{ patient.phone }}</span>
+                </dd>
+                <dt><span>Srf Number</span></dt>
+                <dd>
+                    <span>{{ patient.srfNumber }}</span>
+                </dd>
+                <dt><span>Bucode</span></dt>
+                <dd>
+                    <span>{{ patient.bucode }}</span>
+                </dd>
+                <dt><span>Category</span></dt>
+                <dd>
+                    <span>{{ patient.category }}</span>
+                </dd>
+                <dt><span>Zone</span></dt>
+                <dd>
+                    <span>{{ patient.zone }}</span>
+                </dd>
+                <dt><span>Queue Type</span></dt>
+                <dd>
+                    <span>{{ patient.queueType }}</span>
+                </dd>
+                <dt><span>Queue Name</span></dt>
+                <dd>
+                    <span>{{ patient.queueName }}</span>
+                </dd>
+                <dt><span>Time Added To Queue</span></dt>
+                <dd>
+                    <span>{{ patient.timeAddedToQueue }}</span>
+                </dd>
+                <dt><span>Created On</span></dt>
+                <dd>
+                    <span>{{ patient.createdOn }}</span>
+                </dd>
+                <dt><span>Updated On</span></dt>
+                <dd>
+                    <span>{{ patient.updatedOn }}</span>
+                </dd>
+                <dt><span>Updated By Msg Id</span></dt>
+                <dd>
+                    <span>{{ patient.updatedByMsgId }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/patient', patient.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

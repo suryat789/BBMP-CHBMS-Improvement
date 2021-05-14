@@ -1,0 +1,65 @@
+{
+  "name": "Patient",
+  "fields": [
+    {
+      "fieldName": "patientId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "srfNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bucode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "category",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "zone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "queueType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "queueName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "timeAddedToQueue",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedByMsgId",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210513060612",
+  "entityTableName": "patient",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

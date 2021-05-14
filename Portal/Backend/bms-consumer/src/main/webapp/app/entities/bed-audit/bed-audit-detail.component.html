@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bedAudit">
+            <h2><span>Bed Audit</span> {{ bedAudit.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Hospital Id</span></dt>
+                <dd>
+                    <span>{{ bedAudit.hospitalId }}</span>
+                </dd>
+                <dt><span>Bed Id</span></dt>
+                <dd>
+                    <span>{{ bedAudit.bedId }}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ bedAudit.type }}</span>
+                </dd>
+                <dt><span>Capacity</span></dt>
+                <dd>
+                    <span>{{ bedAudit.capacity }}</span>
+                </dd>
+                <dt><span>Occupied</span></dt>
+                <dd>
+                    <span>{{ bedAudit.occupied }}</span>
+                </dd>
+                <dt><span>Blocked</span></dt>
+                <dd>
+                    <span>{{ bedAudit.blocked }}</span>
+                </dd>
+                <dt><span>Vacant</span></dt>
+                <dd>
+                    <span>{{ bedAudit.vacant }}</span>
+                </dd>
+                <dt><span>Created On</span></dt>
+                <dd>
+                    <span>{{ bedAudit.createdOn }}</span>
+                </dd>
+                <dt><span>Updated On</span></dt>
+                <dd>
+                    <span>{{ bedAudit.updatedOn }}</span>
+                </dd>
+                <dt><span>Updated By Msg Id</span></dt>
+                <dd>
+                    <span>{{ bedAudit.updatedByMsgId }}</span>
+                </dd>
+                <dt><span>Audited On</span></dt>
+                <dd>
+                    <span>{{ bedAudit.auditedOn }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bed-audit', bedAudit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

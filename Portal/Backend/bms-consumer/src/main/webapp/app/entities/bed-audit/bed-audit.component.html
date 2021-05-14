@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span>Bed Audits</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bed-audit" [routerLink]="['/bed-audit/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Bed Audit
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="bedAudits?.length === 0">
+        <span>No bedAudits found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="bedAudits && bedAudits.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Hospital Id</span></th>
+                    <th scope="col" ><span>Bed Id</span></th>
+                    <th scope="col" ><span>Type</span></th>
+                    <th scope="col" ><span>Capacity</span></th>
+                    <th scope="col" ><span>Occupied</span></th>
+                    <th scope="col" ><span>Blocked</span></th>
+                    <th scope="col" ><span>Vacant</span></th>
+                    <th scope="col" ><span>Created On</span></th>
+                    <th scope="col" ><span>Updated On</span></th>
+                    <th scope="col" ><span>Updated By Msg Id</span></th>
+                    <th scope="col" ><span>Audited On</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bedAudit of bedAudits ;trackBy: trackId">
+                    <td><a [routerLink]="['/bed-audit', bedAudit.id, 'view']">{{ bedAudit.id }}</a></td>
+                    <td>{{ bedAudit.hospitalId }}</td>
+                    <td>{{ bedAudit.bedId }}</td>
+                    <td>{{ bedAudit.type }}</td>
+                    <td>{{ bedAudit.capacity }}</td>
+                    <td>{{ bedAudit.occupied }}</td>
+                    <td>{{ bedAudit.blocked }}</td>
+                    <td>{{ bedAudit.vacant }}</td>
+                    <td>{{ bedAudit.createdOn | date:'medium' }}</td>
+                    <td>{{ bedAudit.updatedOn | date:'medium' }}</td>
+                    <td>{{ bedAudit.updatedByMsgId }}</td>
+                    <td>{{ bedAudit.auditedOn | date:'medium' }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/bed-audit', bedAudit.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/bed-audit', bedAudit.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(bedAudit)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
