@@ -2,27 +2,29 @@ package com.infy.stg.ext.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.infy.stg.domain.Bed;
 import com.infy.stg.ext.repository.BedRepository;
-import com.infy.stg.service.BedService;
-import com.infy.stg.service.dto.BedAuditDTO;
-import com.infy.stg.service.dto.BedDTO;
+import com.infy.stg.ext.service.BedService;
+import com.infy.stg.service.BedAuditService;
+import com.infy.stg.service.HospitalAuditService;
+import com.infy.stg.service.dto.*;
 import com.infy.stg.service.mapper.BedMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import com.infy.stg.ext.service.HospitalService;
 import com.infy.stg.domain.Hospital;
 import com.infy.stg.ext.repository.HospitalRepository;
-import com.infy.stg.service.dto.HospitalDTO;
 import com.infy.stg.service.mapper.HospitalMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -40,11 +42,15 @@ public class HospitalServiceImpl extends com.infy.stg.service.impl.HospitalServi
     private final HospitalRepository hospitalRepository;
 
     private final HospitalMapper hospitalMapper;
+    private HospitalAuditService hospitalAuditService;
+    private BedAuditService bedAuditService;
 
-    public HospitalServiceImpl(HospitalRepository hospitalRepository, HospitalMapper hospitalMapper) {
+    public HospitalServiceImpl(HospitalRepository hospitalRepository, HospitalMapper hospitalMapper, HospitalAuditService hospitalAuditService, BedAuditService bedAuditService) {
         super(hospitalRepository, hospitalMapper);
         this.hospitalRepository = hospitalRepository;
         this.hospitalMapper = hospitalMapper;
+        this.hospitalAuditService = hospitalAuditService;
+        this.bedAuditService = bedAuditService;
     }
 
     @Autowired
@@ -54,63 +60,110 @@ public class HospitalServiceImpl extends com.infy.stg.service.impl.HospitalServi
     @Autowired
     private BedService bedService;
 
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<HospitalDTO> findByHospitalId(String hospitalId) {
+        log.debug("Request to get Hospital : {}", hospitalId);
+        return hospitalRepository.findByHospitalId(hospitalId)
+            .map(hospitalMapper::toDto);
+    }
+
     @Bean
-    public Consumer<Message<Map>> consumeHospitalBed() {
+    public synchronized Consumer<Message<Map>> consumeHospitalBed() {
         return message -> {
             log.info("Hospital Event Received '{}'", message);
-            Map<String, Object> map = new HashMap<String, Object>(message.getPayload());
-            map.put("address", map.remove("hospitalAddress"));
-            map.put("name", map.remove("hospitalName"));
-            map.put("phone", map.remove("hospitalPhoneNumber"));
-            map.put("type", map.remove("hospitalType"));
-            map.put("status", map.remove("hospitalStatus"));
-            map.put("updatedByMsgId", map.remove("updatedByMessageId"));
-            ObjectMapper mapper = new ObjectMapper();
-            Map[] beds = mapper.convertValue(map.remove("beds"), Map[].class);
-            mapper.registerModule(new JavaTimeModule());
-            HospitalDTO hospitalDTO = mapper.convertValue(map, HospitalDTO.class);
-            Optional<Hospital> hispitalOpt = hospitalRepository.findByHospitalId(hospitalDTO.getHospitalId());
-            hispitalOpt.ifPresent(hospital -> hospitalDTO.setId(hospital.getId()));
-            Long hospitalId = save(hospitalDTO).getId();
-
-            Arrays.stream(beds).forEach(m -> {
-                m.put("type", m.remove("bedType"));
-                BedDTO bedDTO = mapper.convertValue(m, BedDTO.class);
-                Optional<Bed> bedOpt = bedRepository.findByHospitalHospitalIdAndType(hospitalDTO.getHospitalId(), bedDTO.getType());
-                bedOpt.ifPresent(bed -> bedDTO.setId(bed.getId()));
-                bedDTO.setHospitalId(hospitalId);
-                bedService.save(bedDTO);
-            });
-            log.info("Beds Event Received '{}'", Arrays.toString(beds));
-
+            HospitalDTO hospitalDTO = mapToDTO(message.getPayload());
+            try {
+                hospitalDTO = save(hospitalDTO);
+                HospitalAuditDTO hospitalAuditDTO = mapToAuditDTO(hospitalDTO);
+                hospitalAuditService.save(hospitalAuditDTO);
+                updateBeds(message.getPayload(), hospitalDTO);
+            } catch (DataIntegrityViolationException ex) {
+                log.error(ex.getMessage(), ex);
+            }
         };
     }
-/**
- HospitalBed{
- "generalAvailability": 0,
- "generalBlockedCapacity": 0,
- "generalCapacity": 0,
- "generalOccupancy": 0,
- "hduAvailibility": 0,
- "hduBlockedCapacity": 0,
- "hduCapacity": 0,
- "hduOccupancy": 0,
- "hospitalAddress": "string",
- "hospitalId": "string",
- "hospitalName": "string",
- "hospitalPhoneNumber": "string",
- "icuAvailability": 0,
- "icuBlockedCapicity": 0,
- "icuCapacity": 0,
- "icuOccupancy": 0,
- "icuVentilatorAvailibility": 0,
- "icuVentilatorBlockedCapacity": 0,
- "icuVentilatorCapacity": 0,
- "icuVentilatorOccupancy": 0,
- "pinCode": "string",
- "updatedByMessageId": "string",
- "updatedOn": "2021-05-12T08:02:07.134Z",
- "zone": "string"
- }
- **/
+
+    private HospitalDTO mapToDTO(Map<String, Object> payload) {
+        Map<String, Object> map = new HashMap<String, Object>(payload);
+        map.put("address", map.remove("hospitalAddress"));
+        map.put("name", map.remove("hospitalName"));
+        map.put("phone", map.remove("hospitalPhoneNumber"));
+        map.put("type", map.remove("hospitalType"));
+        map.put("status", map.remove("hospitalStatus"));
+        map.put("updatedByMsgId", map.remove("updatedByMessageId"));
+
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        Map[] beds = mapper.convertValue(map.remove("beds"), Map[].class);
+
+        HospitalDTO hospitalDTO = mapper.convertValue(map, HospitalDTO.class);
+
+        List<String> nullFields = ((Map<String, Object>) mapper.convertValue(hospitalDTO, Map.class)).entrySet().stream()
+            .filter(entry -> entry.getValue() == null)
+            .map(Map.Entry::getKey)
+            .collect(Collectors.toList());
+
+        Optional<HospitalDTO> hospitalOpt = findByHospitalId(hospitalDTO.getHospitalId());
+        if (hospitalOpt.isPresent()) {
+            HospitalDTO hospital = hospitalOpt.get();
+            hospitalDTO.setId(hospital.getId());
+            BeanUtils.copyProperties(hospitalDTO, hospital, nullFields.toArray(new String[0]));
+            hospitalDTO = hospital;
+        } else {
+            hospitalDTO.setCreatedOn(Instant.now());
+        }
+        hospitalDTO.setUpdatedOn(Instant.now());
+        return hospitalDTO;
+    }
+
+    private HospitalAuditDTO mapToAuditDTO(HospitalDTO hospitalDTO) {
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        HospitalAuditDTO hospitalAuditDTO = mapper.convertValue(hospitalDTO, HospitalAuditDTO.class);
+        return hospitalAuditDTO;
+    }
+
+    private void updateBeds(Map<String, Object> payload, HospitalDTO hospitalDTO) {
+        Map<String, Object> map = new HashMap<String, Object>(payload);
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        Map[] beds = mapper.convertValue(map.remove("beds"), Map[].class);
+
+        Arrays.stream(beds).forEach(m -> {
+            m.put("type", m.remove("bedType"));
+            BedDTO bedDTO = mapper.convertValue(m, BedDTO.class);
+            Optional<BedDTO> bedOpt = bedService.findByHospitalHospitalIdAndType(hospitalDTO.getHospitalId(), bedDTO.getType());
+
+            List<String> nullFields = ((Map<String, Object>) mapper.convertValue(bedDTO, Map.class)).entrySet().stream()
+                .filter(entry -> entry.getValue() == null)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+            if (bedOpt.isPresent()) {
+                BedDTO bed = bedOpt.get();
+                bedDTO.setId(bed.getId());
+                BeanUtils.copyProperties(bedDTO, bed, nullFields.toArray(new String[0]));
+                bedDTO = bed;
+            } else {
+                bedDTO.setCreatedOn(Instant.now());
+            }
+            bedDTO.setHospitalId(hospitalDTO.getId());
+            bedDTO.setUpdatedOn(Instant.now());
+            bedDTO.setUpdatedByMsgId(hospitalDTO.getUpdatedByMsgId());
+
+            try{
+                bedDTO = bedService.save(bedDTO);
+                BedAuditDTO bedAuditDTO = mapToAuditDTO(bedDTO);
+                bedAuditService.save(bedAuditDTO);
+            }
+            catch (DataIntegrityViolationException ex){
+                log.error(ex.getMessage(), ex);
+            }
+
+        });
+    }
+
+    private BedAuditDTO mapToAuditDTO(BedDTO bedDTO) {
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        BedAuditDTO bedAuditDTO = mapper.convertValue(bedDTO, BedAuditDTO.class);
+        return bedAuditDTO;
+    }
 }

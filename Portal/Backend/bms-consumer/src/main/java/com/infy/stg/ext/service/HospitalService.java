@@ -1,6 +1,7 @@
 package com.infy.stg.ext.service;
 
 import com.infy.stg.service.dto.HospitalDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,4 +11,6 @@ import java.util.Optional;
  */
 public interface HospitalService extends com.infy.stg.service.HospitalService {
 
+    @Transactional(readOnly = true)
+    Optional<HospitalDTO> findByHospitalId(String hospitalId);
 }

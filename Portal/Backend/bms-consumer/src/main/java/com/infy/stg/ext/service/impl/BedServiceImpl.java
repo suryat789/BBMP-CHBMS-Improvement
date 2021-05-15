@@ -1,5 +1,6 @@
 package com.infy.stg.ext.service.impl;
 
+import com.infy.stg.service.dto.HospitalDTO;
 import org.springframework.context.annotation.Primary;
 import com.infy.stg.ext.service.BedService;
 import com.infy.stg.domain.Bed;
@@ -35,5 +36,13 @@ public class BedServiceImpl extends com.infy.stg.service.impl.BedServiceImpl imp
         super(bedRepository, bedMapper);
         this.bedRepository = bedRepository;
         this.bedMapper = bedMapper;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<BedDTO> findByHospitalHospitalIdAndType(String hospitalId, String type) {
+        log.debug("Request to get Bed for Hispital/Type : {}/{}", hospitalId, type);
+        return bedRepository.findByHospitalHospitalIdAndType(hospitalId, type)
+            .map(bedMapper::toDto);
     }
 }
