@@ -52,4 +52,14 @@ if (!$redis->get($key)) {
         }
     }
 
+
+function bedprogress($bedtype="",$seat="")
+{
+  global $cn;
+      $sql="select sum( ".$seat." ) as total_".$seat." from bed_audit  where type='".$bedtype."' and updated_on BETWEEN CURDATE() - INTERVAL 1 DAY
+        AND CURDATE() - INTERVAL 1 SECOND;";
+    $result=mysqli_query($cn, $sql) or die(mysqli_error($cn));
+    $row = mysqli_fetch_array($result);
+    return $row['total_'.$seat];
+}
 ?>

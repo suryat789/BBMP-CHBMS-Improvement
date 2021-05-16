@@ -46,14 +46,14 @@ include('php/dbhandler.php');
 
 
       <div class="card-body">
-        <h4 class="cs-card-title cs-card-title-bed-available">Bed Availability Status <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> 12/04/2021
+        <h4 class="cs-card-title cs-card-title-bed-available">Bed Availability Status <!-- <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> 12/04/2021
             12:50
             PM
             <span class="jk-refresh-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
                 <path d="M0 0h24v24H0V0z" fill="none" />
                 <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
               </svg></span>
-            <span class="jk-refresh-text cs-primary">Refresh</span></span>
+            <span class="jk-refresh-text cs-primary">Refresh</span></span> -->
         </h4>
  
                          <?php
@@ -75,7 +75,18 @@ include('php/dbhandler.php');
                 <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" class="jk-font-bold jk-bed-count-text-total "><?php echo $data[$i]['bed_capacity'];?></h3>
                 <p data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>">
                   <large>
-                    <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font-bold">Total</span>
+                    <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font-bold">Total</span><br/>
+
+                     <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font">
+                      <?php $yesterday_capacity = bedprogress($data[$i]['bed_bedtype'],'capacity');
+                        $today_capacity = $data[$i]['bed_capacity'];
+                        if($today_capacity >= $yesterday_capacity)
+                        {
+                          $increase = $today_capacity - $yesterday_capacity;
+                          echo $increase." Added Today";
+                        }
+                        ?>
+                      </span>
                   </large>
                 </p>
               </div>
@@ -83,7 +94,19 @@ include('php/dbhandler.php');
                 <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" class="jk-font-bold jk-bed-count-text-occupied "><?php echo $data[$i]['bed_occupied'];?></h3>
                 <p data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>">
                   <large>
-                    <span data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font-bold">Occupied</span>
+                  <span data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font-bold">Occupied</span>
+                  <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font"> 
+                      <?php $yesterday_occupied = bedprogress($data[$i]['bed_bedtype'],'occupied');
+                        $today_occupied = $data[$i]['bed_occupied'];
+                        if($today_occupied >= $yesterday_occupied)
+                        {
+                          $increase = $today_occupied - $yesterday_occupied;
+                          echo $increase." Occupied Today";
+                        }
+                        ?>
+
+                </span>
+
                   </large>
                 </p>
               </div>
@@ -92,13 +115,24 @@ include('php/dbhandler.php');
                 <p data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" >
                   <large>
                     <span data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font-bold">Vacant</span>
+                   <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font"><?php $beddd = bedprogress($data[$i]['bed_bedtype'],'vacant'); echo $beddd;  ?>  
+                      <?php $yesterday_vacant = bedprogress($data[$i]['bed_bedtype'],'vacant');
+                        $today_vacant = $data[$i]['bed_vacant'];
+                        if($today_vacant >= $yesterday_vacant)
+                        {
+                          $increase = $today_vacant - $yesterday_vacant;
+                          echo $increase." Vacant Today";
+                        }
+                        ?>
+                 </span>
+                    
                   </large>
                 </p>
               </div>
             </div>
             <div class="row jk-bed-available-row" id="cs-doctor-consultations-card">
               <div class="col-md-12 jk-text-align-right ">
-                <h6 class="jk-bed-current-status-success"> +10 From Yesterday</h4>
+                <!-- <h6 class="jk-bed-current-status-success"> +10 From Yesterday</h4> -->
               </div>
             </div>
           </div>

@@ -14,8 +14,8 @@ if($_SERVER['HTTP_HOST'] == 'localhost')
 
 	$dbservertype='mysqli';
 	$servername='localhost';
-	$dbuser='covid';
-	$dbpassword='covid';
+	$dbuser='root';
+	$dbpassword='root';
 	$dbname='chbms';
 
 }
