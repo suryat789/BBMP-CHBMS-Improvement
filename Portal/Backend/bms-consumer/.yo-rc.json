@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.infy.stg"
+      "packageName": "org.bbmp.chbms"
     },
     "jhipsterVersion": "6.10.5",
     "applicationType": "monolith",
-    "baseName": "bms",
-    "packageName": "com.infy.stg",
-    "packageFolder": "com/infy/stg",
+    "baseName": "chbms",
+    "packageName": "org.bbmp.chbms",
+    "packageFolder": "org/bbmp/chbms",
     "serverPort": "8080",
     "authenticationType": "jwt",
     "cacheProvider": "ehcache",
@@ -21,14 +21,12 @@
     "serviceDiscoveryType": false,
     "buildTool": "maven",
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "M2RkN2EwYzQ0YTdiMjI5ZTAzMmRhYTJmN2Q2MDQwMDFjZThhYmY1YThjMDEyYzc3OWEyY2I0M2UzOTA0NGNhZjcyYjVhYWRkYTc4MWZhZDU0NzEwZWYzYjM5NGIzNmRmY2E4MGZmMTE4Yjg4M2NhMDIyNzg5NDE4MjVjZTg3OWI=",
+    "jwtSecretKey": "ODIxY2Y2YzBhZGRkZmExZmQyYjQxNjRiNGNhNDQ0MjgxYWQ4OTkxZGM2ODBlMjNkYzAwMGE3MDMxMTE1YTk1NGVjZmQzZjYwYTQ3ZWY3ZDlhNjgyOTFiNjVjZjczMDczNWMyZmQ4ZDM0YWZjYzU4OTAxMDU1Y2VlODg5M2U5NmQ=",
     "embeddableLaunchScript": false,
     "useSass": true,
     "clientPackageManager": "npm",
-    "clientFramework": "angularX",
-    "clientTheme": "none",
-    "clientThemeVariant": "",
-    "creationTimestamp": 1620885159857,
+    "skipClient": true,
+    "creationTimestamp": 1621136260533,
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "entitySuffix": "",

@@ -38,9 +38,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: ${JDBC_MYSQL_CONNECTION_URL:jdbc:mysql://localhost:3306/chbms?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true}
-    username: ${JDBC_MYSQL_CONNECTION_USERNAME:root}
-    password: ${JDBC_MYSQL_CONNECTION_PASSWORD:password}
+    url: ${JDBC_MYSQL_CONNECTION_URL}
+    username: ${JDBC_MYSQL_CONNECTION_USERNAME}
+    password: ${JDBC_MYSQL_CONNECTION_PASSWORD}
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -66,16 +66,16 @@ spring:
   cloud:
     azure:
       eventhub:
-        connection-string: ${SPRING_CLOUD_AZURE_EVENTHUB_CONNECTION_STRING:defaults}
-        checkpoint-storage-account: ${SPRING_CLOUD_AZURE_CHECKPOINT_STORAGE_ACCOUNT:defaults}
-        checkpoint-access-key: ${SPRING_CLOUD_AZURE_CHECKPOINT_ACCESS_KEY:defaults}
+        connection-string: ${SPRING_CLOUD_AZURE_EVENTHUB_CONNECTION_STRING}
+        checkpoint-storage-account: ${SPRING_CLOUD_AZURE_CHECKPOINT_STORAGE_ACCOUNT}
+        checkpoint-access-key: ${SPRING_CLOUD_AZURE_CHECKPOINT_ACCESS_KEY}
     stream:
       bindings:
         consumePatient-in-0:
-          destination: ${SPRING_CLOUD_STREAM_PATIENT_DESTINATION:patient}
+          destination: ${SPRING_CLOUD_STREAM_PATIENT_DESTINATION}
           group: $Default
         consumeHospitalBed-in-0:
-          destination: ${SPRING_CLOUD_STREAM_HOSPITAL_DESTINATION:hospital}
+          destination: ${SPRING_CLOUD_STREAM_HOSPITAL_DESTINATION}
           group: $Default
 
       #        supply-out-0:

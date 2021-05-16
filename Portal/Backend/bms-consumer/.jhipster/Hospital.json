@@ -54,7 +54,7 @@
       "relationshipName": "id"
     }
   ],
-  "changelogDate": "20210513060712",
+  "changelogDate": "20210516034034",
   "entityTableName": "hospital",
   "dto": "mapstruct",
   "pagination": "no",

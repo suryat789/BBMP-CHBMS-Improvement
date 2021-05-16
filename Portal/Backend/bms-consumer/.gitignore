@@ -147,4 +147,10 @@ Desktop.ini
 ######################
 .eslintcache
 
+######################
+# Customized
+######################
+stc/main/java/com/infy/stg/ext
 .ipynb_checkpoints
+etc/env-dev.sh
+

@@ -45,7 +45,7 @@
       "otherEntityRelationshipName": "id"
     }
   ],
-  "changelogDate": "20210513060812",
+  "changelogDate": "20210516034134",
   "entityTableName": "bed",
   "dto": "mapstruct",
   "pagination": "no",

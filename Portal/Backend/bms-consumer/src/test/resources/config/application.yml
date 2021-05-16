@@ -18,10 +18,10 @@ spring:
     # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
     #active: testcontainers
   application:
-    name: bms
+    name: chbms
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:bms;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:chbms;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     name:
     username:
     password:
@@ -57,13 +57,13 @@ spring:
     basename: i18n/messages
   task:
     execution:
-      thread-name-prefix: bms-task-
+      thread-name-prefix: chbms-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: bms-scheduling-
+      thread-name-prefix: chbms-scheduling-
       pool:
         size: 1
   thymeleaf:
@@ -81,7 +81,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'bmsApp'
+    name: 'chbmsApp'
   logging:
     # To test json console appender
     use-json-format: false
@@ -97,7 +97,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: M2RkN2EwYzQ0YTdiMjI5ZTAzMmRhYTJmN2Q2MDQwMDFjZThhYmY1YThjMDEyYzc3OWEyY2I0M2UzOTA0NGNhZjcyYjVhYWRkYTc4MWZhZDU0NzEwZWYzYjM5NGIzNmRmY2E4MGZmMTE4Yjg4M2NhMDIyNzg5NDE4MjVjZTg3OWI=
+        base64-secret: ODIxY2Y2YzBhZGRkZmExZmQyYjQxNjRiNGNhNDQ0MjgxYWQ4OTkxZGM2ODBlMjNkYzAwMGE3MDMxMTE1YTk1NGVjZmQzZjYwYTQ3ZWY3ZDlhNjgyOTFiNjVjZjczMDczNWMyZmQ4ZDM0YWZjYzU4OTAxMDU1Y2VlODg5M2U5NmQ=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
   metrics:

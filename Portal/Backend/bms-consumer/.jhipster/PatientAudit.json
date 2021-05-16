@@ -55,7 +55,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20210513060912",
+  "changelogDate": "20210516034234",
   "entityTableName": "patient_audit",
   "dto": "mapstruct",
   "pagination": "no",

@@ -51,7 +51,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20210513061012",
+  "changelogDate": "20210516034334",
   "entityTableName": "hospital_audit",
   "dto": "mapstruct",
   "pagination": "no",

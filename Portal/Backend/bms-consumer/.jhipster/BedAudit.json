@@ -47,7 +47,7 @@
     }
   ],
   "relationships": [],
-  "changelogDate": "20210513061112",
+  "changelogDate": "20210516034434",
   "entityTableName": "bed_audit",
   "dto": "mapstruct",
   "pagination": "no",
