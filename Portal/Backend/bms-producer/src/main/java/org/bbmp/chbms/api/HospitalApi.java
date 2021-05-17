@@ -5,6 +5,7 @@
  */
 package org.bbmp.chbms.api;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import org.bbmp.chbms.model.ErrorResponse;
 import org.bbmp.chbms.model.Hospitals;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-05-11T13:15:22.100Z[GMT]")
 @Validated
@@ -42,6 +44,22 @@ public interface HospitalApi {
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
     ResponseEntity<Hospitals> hospitalPost(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody Hospitals body);
+
+    @Operation(summary = "Add all Hospital Details", description = "This api is to add Multiple hospital details to the system", security = {
+            @SecurityRequirement(name = "implicit", scopes = {
+                    "write",
+                    "read"        })    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Hospitals.class)))),
+
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorResponse.class))) })
+    @RequestMapping(value = "/hospital/all",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    ResponseEntity<List<Hospitals>> hospitalAllPost(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody List<Hospitals> body);
 
 }
 

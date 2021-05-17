@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-05-10T06:55:16.648Z[GMT]")
 @RestController
@@ -46,6 +47,16 @@ public class HospitalApiController implements HospitalApi {
         }
 
         return new ResponseEntity<Hospitals>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<List<Hospitals>> hospitalAllPost(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody List<Hospitals> body) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            List<Hospitals> hospitals = hospitalService.pushHospitalsToEventHub(body);
+            return new ResponseEntity<List<Hospitals>>(hospitals, HttpStatus.CREATED);
+        }
+
+        return new ResponseEntity<List<Hospitals>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

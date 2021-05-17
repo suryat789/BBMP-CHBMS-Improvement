@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Sinks;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HospitalServiceImpl implements HospitalService {
@@ -36,5 +38,20 @@ public class HospitalServiceImpl implements HospitalService {
         log.info("Sending hospital To event hub {}", hospitalsMessage);
         processor.emitNext(MessageBuilder.withPayload(hospitalsMessage).build(), Sinks.EmitFailureHandler.FAIL_FAST);
         return hospitals;
+    }
+
+    @Override
+    public List<Hospitals> pushHospitalsToEventHub(List<Hospitals> hospitalsList) {
+        log.debug("Pushing List of Hospitals to eventhub {}", hospitalsList);
+        List<HospitalsMessage> hospitalsMessages = hospitalsList.stream()
+                .map(hospitalMessageMapper::hospitalToHospitalMessage)
+                .peek(hospitalsMessage -> {
+                    hospitalsMessage.setUpdatedOn(Instant.now());
+                    hospitalsMessage.setUpdatedByMessageId("service");
+                    processor.emitNext(MessageBuilder.withPayload(hospitalsMessage).build(), Sinks.EmitFailureHandler.FAIL_FAST);
+                })
+                .collect(Collectors.toList());
+        log.debug("hospital List {}", hospitalsMessages);
+        return hospitalsList;
     }
 }
