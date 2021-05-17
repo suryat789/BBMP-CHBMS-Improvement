@@ -35,7 +35,7 @@ Add the `help` flag on any command to see how you can use it. For example, `npm 
 
 The `npm run` command will list all of the scripts available to run for this project.
 
-2. Application Variables: We need to set the following variables for `application-dev.yaml` for it to run correctly in dev-mode. 
+2. Application Variables: We need to set the following variables for `application-dev.yaml` for it to run correctly in dev-mode.
 
 ```bash
 export JDBC_MYSQL_CONNECTION_URL=
@@ -46,7 +46,10 @@ export SPRING_CLOUD_AZURE_CHECKPOINT_STORAGE_ACCOUNT=
 export SPRING_CLOUD_AZURE_CHECKPOINT_ACCESS_KEY=
 export SPRING_CLOUD_STREAM_PATIENT_DESTINATION=
 export SPRING_CLOUD_STREAM_HOSPITAL_DESTINATION=
+export SPRING_CLOUD_STREAM_EXCEPTION_DESTINATION=
 ```
+
+Similarly, appropriate modifications needs to be done in `application-prod.yaml` to run the application correctly in production mode.
 
 ### PWA Support
 

@@ -77,6 +77,8 @@ spring:
         consumeHospitalBed-in-0:
           destination: ${SPRING_CLOUD_STREAM_HOSPITAL_DESTINATION}
           group: $Default
+        produceException-out-0:
+          destination: ${SPRING_CLOUD_STREAM_EXCEPTION_DESTINATION}
 
       #        supply-out-0:
       #          destination: patient
@@ -90,7 +92,7 @@ spring:
             consumer:
               checkpoint-mode: RECORD
       function:
-        definition: consumePatient;consumeHospitalBed; #;supply;
+        definition: consumePatient;consumeHospitalBed;produceException; #;supply;
       poller:
         initial-delay: 5000
         fixed-delay: 1000

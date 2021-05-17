@@ -19,8 +19,10 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.EmitterProcessor;
 
 import java.time.Instant;
 import java.util.*;
@@ -41,13 +43,15 @@ public class PatientServiceImpl extends org.bbmp.chbms.service.impl.PatientServi
     private final PatientMapper patientMapper;
     private final PatientAuditService patientAuditService;
     private final PatientAuditMapper patientAuditMapper;
+    private EmitterProcessor<Message<Map>> emitterProcessor;
 
-    public PatientServiceImpl(PatientRepository patientRepository, PatientMapper patientMapper, PatientAuditService patientAuditService, PatientAuditMapper patientAuditMapper) {
+    public PatientServiceImpl(PatientRepository patientRepository, PatientMapper patientMapper, PatientAuditService patientAuditService, PatientAuditMapper patientAuditMapper, EmitterProcessor<Message<Map>> emitterProcessor) {
         super(patientRepository, patientMapper);
         this.patientRepository = patientRepository;
         this.patientMapper = patientMapper;
         this.patientAuditService = patientAuditService;
         this.patientAuditMapper = patientAuditMapper;
+        this.emitterProcessor = emitterProcessor;
     }
 
     @Override
@@ -69,6 +73,7 @@ public class PatientServiceImpl extends org.bbmp.chbms.service.impl.PatientServi
                 patientAuditService.save(patientAuditDTO);
             } catch (DataIntegrityViolationException ex) {
                 log.error(ex.getMessage(), ex);
+                emitterProcessor.onNext(MessageBuilder.withPayload((Map) Map.of("exception", ex.getMessage(), "message", message)).build());
             }
         };
     }
