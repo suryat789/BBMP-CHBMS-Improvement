@@ -12,7 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+  
+    
     steps:
     - uses: actions/checkout@v2
 
@@ -22,6 +23,8 @@ jobs:
         java-version: '11'
 
     - name: Build with Maven
+      working-directory: ./BBMP-CHBMS-Improvement/Portal/Backend/bms-producer
+
       run: mvn clean install
 
     - name: Upload artifact for deployment job
