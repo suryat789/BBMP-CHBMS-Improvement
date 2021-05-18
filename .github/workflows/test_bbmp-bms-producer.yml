@@ -4,7 +4,7 @@
 name: Build and deploy JAR app to Azure Web App - bbmp-bms-producer
 
 on:
-  push:
+  pull_request:
     branches:
       - test
   workflow_dispatch:
