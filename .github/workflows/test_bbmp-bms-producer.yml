@@ -24,17 +24,13 @@ jobs:
 
     - name: Build with Maven
       working-directory: ./Portal/Backend/bms-producer
-
-      run: mvn clean install
+          
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
         name: java-app
-        run: |
-            #ls ${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/
-            pwd
-        #path: '${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/*.jar'
+        path: '${{ github.workspace }}/Portal/Backend/bms-producer/target/*.jar'
 
   #deploy:
     #runs-on: ubuntu-latest
