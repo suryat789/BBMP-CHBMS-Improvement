@@ -23,34 +23,38 @@ jobs:
         java-version: '11'
 
     - name: Build with Maven
-      working-directory: ./BBMP-CHBMS-Improvement/Portal/Backend/bms-producer
+      run: |
+          ls
+          pwd
+      
+     #working-directory: ./BBMP-CHBMS-Improvement/Portal/Backend/bms-producer
 
-      run: mvn clean install
+      #run: mvn clean install
 
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: java-app
-        path: '${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/*.jar'
+    #- name: Upload artifact for deployment job
+     # uses: actions/upload-artifact@v2
+      #with:
+       # name: java-app
+        #path: '${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/*.jar'
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  #deploy:
+   # runs-on: ubuntu-latest
+    #needs: build
+    #environment:
+     # name: 'production'
+      #url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: java-app
+    #steps:
+    #- name: Download artifact from build job
+     # uses: actions/download-artifact@v2
+      #with:
+       # name: java-app
 
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'bbmp-bms-producer'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1f02dd1bbd954be3863429dc4d6bfbee }}
-        package: '*.jar'
+   # - name: Deploy to Azure Web App
+    #  id: deploy-to-webapp
+     # uses: azure/webapps-deploy@v2
+      #with:
+       # app-name: 'bbmp-bms-producer'
+        #slot-name: 'production'
+        #publish-profile: ${{ secrets.AzureAppService_PublishProfile_1f02dd1bbd954be3863429dc4d6bfbee }}
+        #package: '*.jar'
