@@ -31,7 +31,10 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: java-app
-        path: '${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/*.jar'
+        run: |
+            ls ${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/
+            pwd
+        #path: '${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/*.jar'
 
   #deploy:
     #runs-on: ubuntu-latest
