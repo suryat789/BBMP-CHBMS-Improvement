@@ -32,7 +32,7 @@ jobs:
       with:
         name: java-app
         run: |
-            ls ${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/
+            #ls ${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/
             pwd
         #path: '${{ github.workspace }}/BBMP-CHBMS-Improvement/Portal/Backend/bms-producer/target/*.jar'
 
