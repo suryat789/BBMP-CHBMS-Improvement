@@ -107,7 +107,7 @@ function mySubmitFunction(isValid = false) {
     
     $.ajax({
       type: 'POST',
-      url: "php/searchQueueStatus.php",                     
+      url: "https://chbms.azurewebsites.net/php/searchQueueStatus.php",                     
       data: {buCode:buNo, phone:mobileNo}, 
       cache: false,
       dataType: 'json',      

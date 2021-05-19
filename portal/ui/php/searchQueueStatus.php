@@ -1,5 +1,5 @@
 <?php
-// header('Content-type: application/json');
+ header('Content-type: application/json');
    include('connection.php'); 
   
     $buCode = $_POST['buCode'];
