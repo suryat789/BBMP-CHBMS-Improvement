@@ -1,6 +1,6 @@
 <?php
 include('php/dbhandler.php');
- ?>
+?>
 
 <!doctype html>
 <html lang="en">
@@ -39,6 +39,9 @@ include('php/dbhandler.php');
           <li class="nav-item">
             <a class="nav-link active jk-bed-availability" aria-current="true" href="#">Bed Availability</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link jk-bed-faq " href="#">FAQ</a>
+          </li>
         </ul>
       </div>
       <!-- router contents -->
@@ -46,7 +49,8 @@ include('php/dbhandler.php');
 
 
       <div class="card-body">
-        <h4 class="cs-card-title cs-card-title-bed-available">Bed Availability Status <!-- <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> 12/04/2021
+        <h4 class="cs-card-title cs-card-title-bed-available">Bed Availability Status
+          <!-- <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> 12/04/2021
             12:50
             PM
             <span class="jk-refresh-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
@@ -55,103 +59,99 @@ include('php/dbhandler.php');
               </svg></span>
             <span class="jk-refresh-text cs-primary">Refresh</span></span> -->
         </h4>
- 
-                         <?php
-            if(count($data)>0) { ?>
 
-             <?php for($i=0;$i<count($data);$i++){
-           if($i % 2 == 0) {   ?>         
-          <div class="jk-bed-card-holder"> 
+        <?php
+        if (count($data) > 0) { ?>
+
+          <?php for ($i = 0; $i < count($data); $i++) {
+            if ($i % 2 == 0) {   ?>
+              <div class="jk-bed-card-holder">
+              <?php } ?>
+              <!-- card 1 search contents -->
+              <div class="cs-white-cards jk-halfcard">
+                <div class="row jk-bed-available-row" id="cs-doctor-consultations-card">
+                  <div class="col-md-12 jk-text-align-center">
+                    <h5 class="jk-font-bold"><?php echo $data[$i]['bed_bedtype']; ?> Bed</h5>
+                  </div>
+                </div>
+                <div class="row jk-bed-available-row" id="cs-doctor-consultations-card">
+                  <div class="col-md-4 jk-bed-count-cards jk-bed-available jk-bed-count-total" data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
+                    <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" class="jk-font-bold jk-bed-count-text-total "><?php echo $data[$i]['bed_capacity']; ?></h3>
+                    <p data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
+                      <large>
+                        <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font-bold">Total</span><br />
+
+                        <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font">
+                          <?php $yesterday_capacity = bedprogress($data[$i]['bed_bedtype'], 'capacity');
+                          $today_capacity = $data[$i]['bed_capacity'];
+                          if ($today_capacity >= $yesterday_capacity) {
+                            $increase = $today_capacity - $yesterday_capacity;
+                            echo $increase . " Added Today";
+                          }
+                          ?>
+                        </span>
+                      </large>
+                    </p>
+                  </div>
+                  <div class="col-md-4 jk-bed-count-cards jk-bed-available jk-bed-count-occupied" id="cs-doctor-consultation" data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
+                    <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" class="jk-font-bold jk-bed-count-text-occupied "><?php echo $data[$i]['bed_occupied']; ?></h3>
+                    <p data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
+                      <large>
+                        <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font-bold">Occupied</span>
+                        <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font">
+                          <?php $yesterday_occupied = bedprogress($data[$i]['bed_bedtype'], 'occupied');
+                          $today_occupied = $data[$i]['bed_occupied'];
+                          if ($today_occupied >= $yesterday_occupied) {
+                            $increase = $today_occupied - $yesterday_occupied;
+                            echo $increase . " Occupied Today";
+                          }
+                          ?>
+                        </span>
+
+                      </large>
+                    </p>
+                  </div>
+                  <div class="col-md-4 jk-bed-count-cards jk-bed-available jk-bed-count-vacant" id="cs-doctor-consultation" data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
+                    <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" class="jk-font-bold jk-bed-count-text-vacant "><?php echo $data[$i]['bed_vacant']; ?></h3>
+                    <p data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
+                      <large>
+                        <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font-bold">Vacant</span>
+                        <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font"><?php $beddd = bedprogress($data[$i]['bed_bedtype'], 'vacant'); echo $beddd;  ?>
+                          <?php $yesterday_vacant = bedprogress($data[$i]['bed_bedtype'], 'vacant');
+                          $today_vacant = $data[$i]['bed_vacant'];
+                          if ($today_vacant >= $yesterday_vacant) {
+                            $increase = $today_vacant - $yesterday_vacant;
+                            echo $increase . " Vacant Today";
+                          }
+                          ?>
+                        </span>
+
+                      </large>
+                    </p>
+                  </div>
+                </div>
+                <div class="row jk-bed-available-row" id="cs-doctor-consultations-card">
+                  <div class="col-md-12 jk-text-align-right ">
+                    <!-- <h6 class="jk-bed-current-status-success"> +10 From Yesterday</h4> -->
+                  </div>
+                </div>
+              </div>
+              <?php if ($i % 2 != 0) {   ?>
+              </div>
+            <?php } ?>
+            <!-- card 1 search contents -->
+
           <?php } ?>
-               <!-- card 1 search contents -->
-          <div class="cs-white-cards jk-halfcard">
-            <div class="row jk-bed-available-row" id="cs-doctor-consultations-card">
-              <div class="col-md-12 jk-text-align-center">
-                <h5 class="jk-font-bold"><?php echo $data[$i]['bed_bedtype'];?> Bed</h5>
-              </div>
-            </div>
-            <div class="row jk-bed-available-row" id="cs-doctor-consultations-card">
-              <div class="col-md-4 jk-bed-count-cards jk-bed-available jk-bed-count-total" data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>">
-                <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" class="jk-font-bold jk-bed-count-text-total "><?php echo $data[$i]['bed_capacity'];?></h3>
-                <p data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>">
-                  <large>
-                    <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font-bold">Total</span><br/>
 
-                     <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font">
-                      <?php $yesterday_capacity = bedprogress($data[$i]['bed_bedtype'],'capacity');
-                        $today_capacity = $data[$i]['bed_capacity'];
-                        if($today_capacity >= $yesterday_capacity)
-                        {
-                          $increase = $today_capacity - $yesterday_capacity;
-                          echo $increase." Added Today";
-                        }
-                        ?>
-                      </span>
-                  </large>
-                </p>
-              </div>
-              <div class="col-md-4 jk-bed-count-cards jk-bed-available jk-bed-count-occupied" id="cs-doctor-consultation" data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>">
-                <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" class="jk-font-bold jk-bed-count-text-occupied "><?php echo $data[$i]['bed_occupied'];?></h3>
-                <p data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>">
-                  <large>
-                  <span data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font-bold">Occupied</span>
-                  <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font"> 
-                      <?php $yesterday_occupied = bedprogress($data[$i]['bed_bedtype'],'occupied');
-                        $today_occupied = $data[$i]['bed_occupied'];
-                        if($today_occupied >= $yesterday_occupied)
-                        {
-                          $increase = $today_occupied - $yesterday_occupied;
-                          echo $increase." Occupied Today";
-                        }
-                        ?>
+        <?php } ?>
 
-                </span>
+        <!-- card 1 search contents -->
 
-                  </large>
-                </p>
-              </div>
-              <div class="col-md-4 jk-bed-count-cards jk-bed-available jk-bed-count-vacant" id="cs-doctor-consultation" data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>">
-                <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" class="jk-font-bold jk-bed-count-text-vacant "><?php echo $data[$i]['bed_vacant'];?></h3>
-                <p data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" >
-                  <large>
-                    <span data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font-bold">Vacant</span>
-                   <span  data-bed_type="<?php echo $data[$i]['bed_bedtype'];?>" style="display:inline-block;" class="jk-font"><?php $beddd = bedprogress($data[$i]['bed_bedtype'],'vacant'); echo $beddd;  ?>  
-                      <?php $yesterday_vacant = bedprogress($data[$i]['bed_bedtype'],'vacant');
-                        $today_vacant = $data[$i]['bed_vacant'];
-                        if($today_vacant >= $yesterday_vacant)
-                        {
-                          $increase = $today_vacant - $yesterday_vacant;
-                          echo $increase." Vacant Today";
-                        }
-                        ?>
-                 </span>
-                    
-                  </large>
-                </p>
-              </div>
-            </div>
-            <div class="row jk-bed-available-row" id="cs-doctor-consultations-card">
-              <div class="col-md-12 jk-text-align-right ">
-                <!-- <h6 class="jk-bed-current-status-success"> +10 From Yesterday</h4> -->
-              </div>
-            </div>
-          </div>
-                   <?php if($i % 2 != 0) {   ?>         
-           </div>
-          <?php } ?>
-          <!-- card 1 search contents -->                   
-            
-             <?php } ?>
-
-                         <?php } ?>
-
-          <!-- card 1 search contents -->
-
-          <button onclick="topFunction()" id="myBtn" title="Go to top" style="display: none;">Top</button>
-        </div>
-
+        <button onclick="topFunction()" id="myBtn" title="Go to top" style="display: none;">Top</button>
       </div>
+
     </div>
+  </div>
   </div>
   <!-- Scripts contents -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">

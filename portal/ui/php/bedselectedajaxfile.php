@@ -12,7 +12,7 @@ $rowperpage = $_POST['length']; // Rows display per page
 $columnIndex = $_POST['order'][0]['column']; // Column index
 $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
 $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
-$searchValue = mysqli_real_escape_string($cn,$_POST['search']['value']); // Search value
+$searchValue = $_POST['search']['value']; // Search value
 
 ## Search 
 $searchQuery = " ";
@@ -23,16 +23,25 @@ if($searchValue != ''){
         c2.updated_on like'%".$searchValue."%' ) ";
 }
 ## Total number of records without filtering
-$sel = mysqli_query($cn,"select count(*) as allcount from bed as c1,hospital as c2 where c1.type='".$pagetype ."' and c1.hospital_id = c2.id");
-$records = mysqli_fetch_assoc($sel);
-$totalRecords = $records['allcount'];
+$selWithoutFilter = "select count(*) as allcount from bed as c1,hospital as c2 where c1.type = ? and c1.hospital_id = c2.id";
+$stmt = $mysqli->prepare($selWithoutFilter);
+$stmt->bind_param("s", $pagetype);  
+$stmt->execute();		
+$resulWithoutFilter = $stmt->get_result()->fetch_row()[0];
+//echo $mysqli->query($selWithoutFilter,$resultmode);	
+$totalRecords = $resulWithoutFilter;		
+$stmt->close();
 
 
 
 ## Total number of record with filtering
-$sel = mysqli_query($cn,"select count(*) as allcount from bed as c1,hospital as c2 where c1.type='".$pagetype ."' and c1.hospital_id = c2.id ".$searchQuery);
-$records = mysqli_fetch_assoc($sel);
-$totalRecordwithFilter = $records['allcount'];
+$selWithFilter= "select count(*) as allcount from bed as c1,hospital as c2 where c1.type = ? and c1.hospital_id = c2.id ".$searchQuery;
+$stmt = $mysqli->prepare($selWithFilter);	
+$stmt->bind_param("s", $pagetype);
+$stmt->execute();		
+$resultwithFilter = $stmt->get_result()->fetch_row()[0];
+$totalRecordwithFilter = $resultwithFilter;		
+$stmt->close();
 
 
 
@@ -57,22 +66,29 @@ $rowperpage = 10;
 
 ## Fetch records
 $empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.updated_on,c2.name,c2.type,c2.phone from bed as c1,hospital
- as  c2 where c1.type='".$pagetype ."'  and c1.hospital_id = c2.id ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
-$empRecords = mysqli_query($cn, $empQuery);
-$data = array();
+ as  c2 where c1.type = ?  and c1.hospital_id = c2.id ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+ //echo preparedQuery($empQuery,array($pagetype));	
+ $stmt = $mysqli->prepare($empQuery);
+  $stmt->bind_param("s", $pagetype);		
+		$stmt->execute();	
+//echo mysqli_prepared_query($mysqli,$empQuery,"s",$pagetype) ;
+ 
+		$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);	
+    	
+		if($stmt->affected_rows>0) {
+			$data = array();	
+		 foreach($result as $key => $val){
+				$data[$key]['name'] = $val['name'];
+				$data[$key]['vacant'] = $val['vacant'];
+        $data[$key]['capacity'] = $val['capacity'];	
+        $data[$key]['occupied'] = $val['occupied'];	
+        $data[$key]['type'] = $val['type'];
+        $data[$key]['phone'] = $val['phone'];	
+        $data[$key]['updated_on'] = $val['updated_on'];	
+		 }
+		}
 
-
-while ($row = mysqli_fetch_assoc($empRecords)) {
-   $data[] = array( 
-      "name"=>$row['name'],
-      "vacant"=>$row['vacant'],
-      "capacity"=>$row['capacity'],
-      "occupied"=>$row['occupied'],
-      "type"=>$row['type'],
-      "phone"=>$row['phone'],
-      "updated_on"=>$row['updated_on'],
-   );
-}
+		$stmt->close();
 
 
 ## Response

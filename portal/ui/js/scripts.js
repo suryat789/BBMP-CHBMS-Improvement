@@ -2,8 +2,8 @@ const array = ['jagan', 'bacac'];
 const validateForm = () => {
   let valid = false;
   let form = document.forms["myForm"]
-  if (form["mobNumber"].value && (form["srNumber"].value || form["buNumber"].value)) {
-    if (form["mobNumber"].value.length == 4 && (form["srNumber"].value.length > 3 || form["buNumber"].value.length > 3)) {
+  if (form["mobNumber"].value && form["buNumber"].value) {
+    if (form["mobNumber"].value.length == 4 && form["buNumber"].value.length > 3) {
       valid = true;
     }
   }
@@ -45,21 +45,21 @@ const validateForm = () => {
 
 document.querySelectorAll('.jk-home-link').forEach(element => element.addEventListener('click', function (event) {
   // do something
-  window.location.href = '/';
+  console.log(event);
+  window.location.href = "index.php";
 }));
-
 document.querySelectorAll('.jk-zone-card').forEach(element => element.addEventListener('click', function (event) {
   // do something
   console.log(event);
   var zonetype = event.target.getAttribute("data-zone_type");
-  window.location.href = 'BBMPDoctorsConsultationQueue.php?type='+zonetype;
+  window.location.href = 'BBMPDoctorsConsultationQueue.php?type=' + zonetype;
 }));
 document.querySelectorAll('.jk-bed-card').forEach(element => element.addEventListener('click', function (event) {
-  // do something
+  // do something  
   console.log(event);
   var ptype = event.target.getAttribute("data-patb_type");
-  window.location.href = 'BBMPBedAllocationQueue.php?type='+ptype;
-  
+  window.location.href = 'BBMPBedAllocationQueue.php?type=' + ptype;
+
 }));
 
 
@@ -79,12 +79,17 @@ document.querySelectorAll('.jk-bed-availability').forEach(element => element.add
   console.log(event);
   window.location.href = "BBMPBedAvailablity.php#";
 }));
+document.querySelectorAll('.jk-bed-faq').forEach(element => element.addEventListener('click', function (event) {
+  // do something
+  console.log(event);
+  window.location.href = "FAQ.php#";
+}));
 
 document.querySelectorAll('.jk-bed-available').forEach(element => element.addEventListener('click', function (event) {
   // do something
   console.log(event);
-   var bedtype = event.target.getAttribute("data-bed_type");
-  window.location.href = 'BBMPBedAvailabilitySelectedBed.php?type='+bedtype;
+  var bedtype = event.target.getAttribute("data-bed_type");
+  window.location.href = 'BBMPBedAvailabilitySelectedBed.php?type=' + bedtype;
 }));
 
 
