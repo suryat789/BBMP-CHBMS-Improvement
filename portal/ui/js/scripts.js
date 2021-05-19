@@ -97,9 +97,41 @@ document.getElementById("cs-doctor-consultation")
 
 function mySubmitFunction(isValid = false) {
   var x = document.getElementById("jk-search-result-element");
+  //var z = document.getElementById("jk-search-result-element-bed");
   var y = document.getElementById("jk-search-helper-text");
-
+  var buNo= document.getElementById("validationCustom01").value;
+  var mobileNo= document.getElementById("validationCustom03").value;
+  //alert(buNo);
   if (isValid) {
+    $.ajax({
+      type: 'POST',
+      url: 'php/searchQueueStatus.php',                     
+      data: {buCode:buNo, phone:mobileNo}, 
+      cache: false,
+      dataType: 'json',      
+      success: function(response){                 
+              console.log(response);
+              if(response.queue_type =='triage'){
+                $('div.lbqType').text('Queue Type');
+                $('div.qType').text("Patients Waiting For Zonal Doctors Consultation (1st Triage )");                
+                $('div.lbqPosition').text('Queue Position');
+                $('div.qPosition').text(response.earliest);                
+                $('div.lbqZone').text('Queue Zone');
+                $('div.qZone').text(response.zone);
+                $('div.msg').text("The patient is yet to be consulted by Zonal doctor. Please wait for the doctor's call");
+              }else if(response.queue_type =='bed'){
+                $('div.lbqType').text('Queue Type');
+                $('div.qType').text("Patients Waiting For Beds");                
+                $('div.lbqPosition').text('Queue Position');
+                $('div.qPosition').text(response.earliest);                
+                $('div.lbqZone').text('Bed Type');
+                $('div.qZone').text(response.queue_name);
+                $('div.msg').text("The patient consultation is done has been put in the queue for " + response.queue_name+" Bed");
+              }              
+              //$('#degInstitute').val(response.institution_id);
+                                                                      
+      }
+  });
     x.style.display = "block";
     y.style.display = "none";
   } else {

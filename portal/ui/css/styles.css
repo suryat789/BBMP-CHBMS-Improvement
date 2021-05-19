@@ -581,12 +581,35 @@ h6 {
 .jk-nav-bar {
     margin-left: 10%;
 }
+
 .jk-search-result {
     height: fit-content;
 }
-.jk-mobile-display-none{
+
+.jk-mobile-display-none {
     display: inline-block;
 }
+
+.jk-s-no {
+    /* width: 1.5em; */
+    display: none;
+}
+
+.jk-s-no-ans {}
+
+.jk-s-no-que {
+    margin-left: 1.8em;
+    display: list-item;
+}
+
+ol.jk-order-list {
+    list-style-type: lower-alpha;
+}
+
+ol.jk-order-list2 {
+    list-style-type: upper-roman;
+}
+
 @media (max-width:991px) {
 
 
@@ -684,10 +707,11 @@ h6 {
         width: 97%;
         height: fit-content;
     }
+
     .jk-bed-table-form {
         margin-top: 0px;
-       }
-  
+    }
+
 }
 
 @media (max-width:400px) {
@@ -717,46 +741,74 @@ h6 {
         height: fit-content;
         align-self: center;
     }
-    .jk-mobile-display-none{
+
+    .jk-mobile-display-none {
         display: none;
     }
- 
+
 }
 
-  @media screen and (max-width: 995px) {
-   #empTable th {
-    width: 100% !important;
-}
+@media screen and (max-width: 995px) {
+    #empTable th {
+        width: 100% !important;
+    }
 }
 
-  
-  div#empTable_filter {
+
+div#empTable_filter {
     padding-bottom: 10px;
 }
 
 table.dataTable thead .sorting::after,
 table.dataTable thead .sorting_asc::after {
-    display:none;
+    display: none;
 }
 
 table.dataTable thead .sorting_desc::after {
-    display:none;
+    display: none;
 }
 
 table.dataTable thead .sorting {
-   background-image: url('../assests/sort-both.png') !important;
-   background-repeat: no-repeat;
-   background-position: center right;
+    background-image: none !important;
+    background-repeat: no-repeat;
+    background-position: center right;
 }
 
 table.dataTable thead .sorting_asc {
-   background-image: url(../assests/sort-asc.png)!important;
-   background-repeat: no-repeat;
-   background-position: center right;
+    background-image: none !important;
+    background-repeat: no-repeat;
+    background-position: center right;
 }
 
 table.dataTable thead .sorting_desc {
-   background-image: url(../assests/sort-desc.png)!important;
-   background-repeat: no-repeat;
-   background-position: center right;
+    background-image: none !important;
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+table.dataTable thead{
+    line-height: 2em;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+   
+}
+table.dataTable tbody{
+    line-height: 2em;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+   
+}
+.table {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+table.dataTable thead th, table.dataTable thead td{
+    background: none;
+    border: none;
+}
+
+.table>:not(caption)>*>*{
+    box-shadow:none;
+}
+.table.dataTable.no-footer{
+    border:1px solid rgba(0, 0, 0, 0.12);
 }

@@ -111,32 +111,31 @@
             <!-- search result  -->
             <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-search-result" id="jk-search-result-element">
               <div class="jk-search-response-holder">
-                <div class="jk-search-response-label">
-                  Queue Type
+                <div class="jk-search-response-label lbqType">                 
                 </div>
-                <div class="jk-search-response-value">
-                  Patients Waiting For Zonal Doctors Consultation (1st Triage )
-                </div>
-              </div>
-              <div class="jk-search-response-holder">
-                <div class="jk-search-response-label">
-                  Queue Position
-                </div>
-                <div class="jk-search-response-value jk-font-bold">
-                  56
+                <div class="jk-search-response-value qType">
+                  
                 </div>
               </div>
               <div class="jk-search-response-holder">
-                <div class="jk-search-response-label">
-                  Zone
+                <div class="jk-search-response-label lbqPosition">                 
                 </div>
-                <div class="jk-search-response-value">
-                  4
+                <div class="jk-search-response-value jk-font-bold qPosition">                  
                 </div>
+              </div>
+              <div class="jk-search-response-holder">
+                <div class="jk-search-response-label lbqZone">                  
+                </div>
+                <div class="jk-search-response-value qZone">
+                 
+                </div>
+              </div>
+              <div class="jk-search-response-holder">
+                <div class="jk-search-response-label msg">                  
+                </div>                
               </div>
             </div>
             <!-- search result  -->
-
           </div>
         </div>
         <!-- card 1 search contents -->
@@ -211,9 +210,14 @@
     </div>
   </div>
   <!-- Scripts contents -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
   </script>
+ 
+
   <script src="js/scripts.js"></script>
+
   <!-- Scripts contents -->
 </body>
 
