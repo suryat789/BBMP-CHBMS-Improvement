@@ -96,47 +96,70 @@ document.querySelectorAll('.jk-bed-available').forEach(element => element.addEve
 document.getElementById("cs-doctor-consultation")
 
 function mySubmitFunction(isValid = false) {
-  var x = document.getElementById("jk-search-result-element");
-  //var z = document.getElementById("jk-search-result-element-bed");
+  var x = document.getElementById("jk-search-result-element");  
   var y = document.getElementById("jk-search-helper-text");
+  var z = document.getElementById("notfound");
   var buNo= document.getElementById("validationCustom01").value;
   var mobileNo= document.getElementById("validationCustom03").value;
+  z.style.display ="none";
   //alert(buNo);
   if (isValid) {
+    
     $.ajax({
       type: 'POST',
-      url: 'php/searchQueueStatus.php',                     
+      url: "php/searchQueueStatus.php",                     
       data: {buCode:buNo, phone:mobileNo}, 
       cache: false,
       dataType: 'json',      
-      success: function(response){                 
-              console.log(response);
-              if(response.queue_type =='triage'){
+      success: function(response){ 
+        var obj = JSON.parse(JSON.stringify(response));
+        console.log(obj);    
+       // var rep = JSON.parse(response);           
+              console.log(obj);
+             if(obj.id==null){   
+                            
+                z.style.display = "block";
+                $('div.lbqType').text('');
+                $('div.qType').text("");                
+                $('div.lbqPosition').text('');
+                $('div.qPosition').text('');                
+                $('div.lbqZone').text('');
+                $('div.qZone').text('');
+                $('div.msg').text("");
+            }else{
+              if(obj.queue_type =='triage'){
                 $('div.lbqType').text('Queue Type');
                 $('div.qType').text("Patients Waiting For Zonal Doctors Consultation (1st Triage )");                
                 $('div.lbqPosition').text('Queue Position');
-                $('div.qPosition').text(response.earliest);                
+                $('div.qPosition').text(obj.earliest);                
                 $('div.lbqZone').text('Queue Zone');
-                $('div.qZone').text(response.zone);
+                $('div.qZone').text(obj.zone);
                 $('div.msg').text("The patient is yet to be consulted by Zonal doctor. Please wait for the doctor's call");
-              }else if(response.queue_type =='bed'){
+              }else if(obj.queue_type =='bed'){
+                
                 $('div.lbqType').text('Queue Type');
                 $('div.qType').text("Patients Waiting For Beds");                
                 $('div.lbqPosition').text('Queue Position');
-                $('div.qPosition').text(response.earliest);                
+                $('div.qPosition').text(obj.earliest);                
                 $('div.lbqZone').text('Bed Type');
-                $('div.qZone').text(response.queue_name);
-                $('div.msg').text("The patient consultation is done has been put in the queue for " + response.queue_name+" Bed");
-              }              
+                $('div.qZone').text(obj.queue_name);
+                $('div.msg').text("The patient consultation is done has been put in the queue for " + obj.queue_name+" Bed");
+              } 
+              
+            }             
               //$('#degInstitute').val(response.institution_id);
                                                                       
       }
   });
     x.style.display = "block";
     y.style.display = "none";
+    //z.style.display = "none";
+
   } else {
+    
     x.style.display = "none";
     y.style.display = "block";
+    //z.style.display = "block";
   }
 }
 

@@ -131,7 +131,12 @@
                 </div>
               </div>
               <div class="jk-search-response-holder">
-                <div class="jk-search-response-label msg">                  
+                <div class="jk-search-response-value msg">                  
+                </div>                
+              </div>
+              <div class="jk-search-response-holder">
+                <div class="jk-search-response-value" id="notfound">
+                Data not found!                  
                 </div>                
               </div>
             </div>
