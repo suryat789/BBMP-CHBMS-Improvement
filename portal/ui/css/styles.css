@@ -785,30 +785,36 @@ table.dataTable thead .sorting_desc {
     background-repeat: no-repeat;
     background-position: center right;
 }
-table.dataTable thead{
+
+table.dataTable thead {
     line-height: 2em;
     vertical-align: middle;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-   
+
 }
-table.dataTable tbody{
+
+table.dataTable tbody {
     line-height: 2em;
     vertical-align: middle;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-   
+
 }
+
 .table {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
-table.dataTable thead th, table.dataTable thead td{
+
+table.dataTable thead th,
+table.dataTable thead td {
     background: none;
     border: none;
 }
 
-.table>:not(caption)>*>*{
-    box-shadow:none;
+.table>:not(caption)>*>* {
+    box-shadow: none;
 }
-.table.dataTable.no-footer{
-    border:1px solid rgba(0, 0, 0, 0.12);
+
+.table.dataTable.no-footer {
+    border: 1px solid rgba(0, 0, 0, 0.12);
 }
