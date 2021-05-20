@@ -1,11 +1,13 @@
 package org.bbmp.chbms.model;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.PositiveOrZero;
+import java.util.Objects;
 
 /**
  * Beds
@@ -22,15 +24,19 @@ public class Beds   {
   @JsonProperty("bedType")
   private String bedType = null;
 
+  @PositiveOrZero
   @JsonProperty("capacity")
   private Integer capacity = null;
 
+  @PositiveOrZero
   @JsonProperty("occupied")
   private Integer occupied = null;
 
+  @PositiveOrZero
   @JsonProperty("blocked")
   private Integer blocked = null;
 
+  @PositiveOrZero
   @JsonProperty("vacant")
   private Integer vacant = null;
 
