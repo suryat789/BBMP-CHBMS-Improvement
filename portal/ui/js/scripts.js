@@ -91,6 +91,11 @@ document.querySelectorAll('.jk-bed-available').forEach(element => element.addEve
   var bedtype = event.target.getAttribute("data-bed_type");
   window.location.href = 'BBMPBedAvailabilitySelectedBed.php?type=' + bedtype;
 }));
+document.querySelectorAll('.jk-bed-contact').forEach(element => element.addEventListener('click', function (event) {
+  // do something
+  console.log(event);
+  window.location.href = "BBMPContact.php#";
+}));
 
 
 document.getElementById("cs-doctor-consultation")

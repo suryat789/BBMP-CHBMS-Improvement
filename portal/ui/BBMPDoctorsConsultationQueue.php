@@ -56,6 +56,9 @@ if ($pagetype == "") {
           <li class="nav-item">
             <a class="nav-link jk-bed-faq " href="#">FAQ</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link jk-bed-contact" href="#">Contact</a>
+          </li>
         </ul>
       </div>
       <!-- router contents -->
@@ -65,9 +68,9 @@ if ($pagetype == "") {
         <- Back </a>
           <div class="card-body">
             <h4 class="cs-card-title">
-            <?php?>
-            Doctors Consultation Queue- <?php echo $pagetype ?>
-              <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?>
+              <? php ?>
+              Doctors Consultation Queue- <?php echo $pagetype ?>
+              <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']); ?>
             </h4>
 
             <!-- card 2 patient waiting for doctors contents -->

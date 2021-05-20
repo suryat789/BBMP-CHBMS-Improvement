@@ -42,6 +42,9 @@ include('php/dbhandler.php');
           <li class="nav-item">
             <a class="nav-link jk-bed-faq " href="#">FAQ</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link jk-bed-contact" href="#">Contact</a>
+          </li>
         </ul>
       </div>
       <!-- router contents -->
@@ -81,16 +84,17 @@ include('php/dbhandler.php');
                       <large>
                         <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font-bold">Total</span><br />
 
-                        
+
                       </large>
                     </p>
                   </div>
                   <div class="col-md-4 jk-bed-count-cards jk-bed-available jk-bed-count-occupied" id="cs-doctor-consultation" data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
-                    <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" class="jk-font-bold jk-bed-count-text-occupied "><?php echo $data[$i]['bed_occupied']+$data[$i]['bed_blocked']; ?></h3>
+                    <h3 data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" class="jk-font-bold jk-bed-count-text-occupied "><?php echo $data[$i]['bed_occupied'] + $data[$i]['bed_blocked']; ?></h3>
                     <p data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
                       <large>
                         <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font-bold">Occupied</span>
-                        <!-- <span data-bed_type="<?php //echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font">
+                        <!-- <span data-bed_type="<?php //echo $data[$i]['bed_bedtype']; 
+                                                  ?>" style="display:inline-block;" class="jk-font">
                           <?php //$yesterday_occupied = bedprogress($data[$i]['bed_bedtype'], 'occupied');
                           // $today_occupied = $data[$i]['bed_occupied'];
                           // if ($today_occupied >= $yesterday_occupied) {
@@ -108,8 +112,10 @@ include('php/dbhandler.php');
                     <p data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>">
                       <large>
                         <span data-bed_type="<?php echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font-bold">Vacant</span>
-                        <!-- <span data-bed_type="<?php //echo $data[$i]['bed_bedtype']; ?>" style="display:inline-block;" class="jk-font">
-                        <?php //$beddd = bedprogress($data[$i]['bed_bedtype'], 'vacant'); echo $beddd;  ?>
+                        <!-- <span data-bed_type="<?php //echo $data[$i]['bed_bedtype']; 
+                                                  ?>" style="display:inline-block;" class="jk-font">
+                        <?php //$beddd = bedprogress($data[$i]['bed_bedtype'], 'vacant'); echo $beddd;  
+                        ?>
                           <?php //$yesterday_vacant = bedprogress($data[$i]['bed_bedtype'], 'vacant');
                           /*$today_vacant = $data[$i]['bed_vacant'];
                           if ($today_vacant >= $yesterday_vacant) {

@@ -58,6 +58,9 @@ if ($pagetype == "") {
           <li class="nav-item">
             <a class="nav-link jk-bed-faq " href="#">FAQ</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link jk-bed-contact" href="#">Contact</a>
+          </li>
         </ul>
       </div>
       <!-- router contents -->

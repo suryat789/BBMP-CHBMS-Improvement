@@ -535,7 +535,8 @@ h6 {
 
 .card-header-tabs {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    ;
+    display: flex;
+    flex-flow: nowrap;
 }
 
 
@@ -608,6 +609,17 @@ ol.jk-order-list {
 
 ol.jk-order-list2 {
     list-style-type: upper-roman;
+}
+
+.jk-header-test {
+    font-size: 10px;
+    color: gray;
+    white-space: normal;
+
+    position: relative;
+
+    display: inline;
+
 }
 
 @media (max-width:991px) {
@@ -734,7 +746,6 @@ ol.jk-order-list2 {
 
     .jk-bed-count-cards {
         width: 29%;
-        height: 185px;
     }
 
     .jk-search-result {
@@ -747,6 +758,10 @@ ol.jk-order-list2 {
         display: none;
     }
 
+    .jk-header-test {
+        display: flex;
+        flex-flow: row-reverse;
+    }
 }
 
 @media screen and (max-width: 995px) {

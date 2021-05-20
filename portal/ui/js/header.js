@@ -12,6 +12,7 @@ class Header extends HTMLElement {
                     <a class="cs-primary navbar-brand cs-header jk-home-link" href="#">
                     <img src="assests/logo.png">
                         BBMP CHBMS Dashboard
+                        <span class="jk-header-test">(Test Site - Under Development)</span>
                     </a>
                 </div>
             </nav>

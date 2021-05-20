@@ -2,19 +2,18 @@
 <html lang="en">
 
 <head>
-    <?php 
-include ('php/connection.php');
-include ('php/query.php');
-include ('php/pat.php');
-include ('php/patientwb.php');
-?>
+    <?php
+    include('php/connection.php');
+    include('php/query.php');
+    include('php/pat.php');
+    include('php/patientwb.php');
+    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link rel="icon" href="assests/logo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <title>BBMP CHBMS Dashboard</title>
     <meta name="description" content="Dashboard to show details of Bed Allocation">
     <meta name="author" content="Jagan">
@@ -41,6 +40,9 @@ include ('php/patientwb.php');
                     </li>
                     <li class="nav-item">
                         <a class="nav-link jk-bed-faq active" href="#">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link jk-bed-contact" href="#">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -86,34 +88,34 @@ include ('php/patientwb.php');
                         <li>
                             <h6 class="jk-font-bold">Where do I start to get in the queue?</h6>
                             <p class="jk-s-no-ans">Below are the steps you need to follow to be on the queue -
-                                <ol class="jk-order-list">
-                                    <li> Call the Bangalore COVID helpline desk at Apthamitra for a preliminary
-                                        consultation on
-                                        the next steps.
-                                        <ol class="jk-order-list2">
-                                            <li> If you have already been diagnosed with Covid and have your RT-PCR test
-                                                report handy,
-                                                please locate the 13-digit SRF no. on the report and call ApthaMitra to
-                                                find out whether
-                                                you need hospitalization. </li>
-                                            <li> If you are advised to self-isolate at home, please follow all Covid
-                                                isolation protocols
-                                                at home. </li>
-                                            <li> If you are advised to get hospitalized, you will be sent an SMS with
-                                                your zone details
-                                                based on your physical location and a BU no. allocated to you. The BU
-                                                no. will be BU
-                                                followed by 6 digits - BU123456.
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li> Once you get your BU no., you can search your status on the dashboard landing
-                                        page by
-                                        entering either your BU no. or SRF no. and the last 4 digits of your registered
-                                        phone
-                                        number. Below is a screenshot of where you can locate the fields
-                                    </li>
-                                </ol>
+                            <ol class="jk-order-list">
+                                <li> Call the Bangalore COVID helpline desk at Apthamitra for a preliminary
+                                    consultation on
+                                    the next steps.
+                                    <ol class="jk-order-list2">
+                                        <li> If you have already been diagnosed with Covid and have your RT-PCR test
+                                            report handy,
+                                            please locate the 13-digit SRF no. on the report and call ApthaMitra to
+                                            find out whether
+                                            you need hospitalization. </li>
+                                        <li> If you are advised to self-isolate at home, please follow all Covid
+                                            isolation protocols
+                                            at home. </li>
+                                        <li> If you are advised to get hospitalized, you will be sent an SMS with
+                                            your zone details
+                                            based on your physical location and a BU no. allocated to you. The BU
+                                            no. will be BU
+                                            followed by 6 digits - BU123456.
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li> Once you get your BU no., you can search your status on the dashboard landing
+                                    page by
+                                    entering either your BU no. or SRF no. and the last 4 digits of your registered
+                                    phone
+                                    number. Below is a screenshot of where you can locate the fields
+                                </li>
+                            </ol>
                             </p>
                         </li>
 
@@ -123,13 +125,13 @@ include ('php/patientwb.php');
                             <p class="jk-s-no-ans"> This means you have been added to the queue for your Doctor’s
                                 consultation. Based on this consultation, you will be allocated to queues of one of the
                                 below 5 kinds of beds -
-                                <ol class="jk-order-list">
-                                    <li> General</li>
-                                    <li> HDU (High Dependency Units) Beds</li>
-                                    <li> ICU (Intensive Care Unit) Beds</li>
-                                    <li> ICU Ventilator (Intensive Case Unit with Ventilators) Beds</li>
-                                    <li> ER Queue</li>
-                                </ol>
+                            <ol class="jk-order-list">
+                                <li> General</li>
+                                <li> HDU (High Dependency Units) Beds</li>
+                                <li> ICU (Intensive Care Unit) Beds</li>
+                                <li> ICU Ventilator (Intensive Case Unit with Ventilators) Beds</li>
+                                <li> ER Queue</li>
+                            </ol>
                             </p>
                         </li>
 
@@ -151,19 +153,19 @@ include ('php/patientwb.php');
                                 If you are not able to see your status on the dashboard, either of the 2 cases are
                                 possible -
 
-                                <ol class="jk-order-list">
-                                    <li> You don’t have a BU no. - You need to get a new BU no. Please refer to
-                                        questions Q#5
-                                        above.</li>
-                                    <li> You have been allocated a bed - If you were able to check your status until a
-                                        few
-                                        minutes ago and can no more find your information on the queueing dashboard, you
-                                        may
-                                        have already received a bed allocation. Please check your SMS.</li>
-                                    <li> You have dropped out of the queue - You may have recovered and have indicated
-                                        that you
-                                        no longer need hospitalization.</li>
-                                </ol>
+                            <ol class="jk-order-list">
+                                <li> You don’t have a BU no. - You need to get a new BU no. Please refer to
+                                    questions Q#5
+                                    above.</li>
+                                <li> You have been allocated a bed - If you were able to check your status until a
+                                    few
+                                    minutes ago and can no more find your information on the queueing dashboard, you
+                                    may
+                                    have already received a bed allocation. Please check your SMS.</li>
+                                <li> You have dropped out of the queue - You may have recovered and have indicated
+                                    that you
+                                    no longer need hospitalization.</li>
+                            </ol>
 
 
 
@@ -181,8 +183,7 @@ include ('php/patientwb.php');
             </div>
         </div>
         <!-- Scripts contents -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
         </script>
         <script src="js/scripts.js"></script>
         <!-- Scripts contents -->
