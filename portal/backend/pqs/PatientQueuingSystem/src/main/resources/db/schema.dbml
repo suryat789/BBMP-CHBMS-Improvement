@@ -1,0 +1,48 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table QUEUE {
+  ID long [PK]
+  TYPE varchar(50)
+  PATIENT_ID long
+  ENQUEUE_TIMESTAMP timestamp [not null, default: `now()`]
+  UPDATED_TIMESTAMP timestamp [not null, default: `now()`]
+  ZONE varchar(100)
+  IS_ACTIVE boolean [default: false]
+  IS_CRITICAL boolean [default: false]
+
+  indexes {
+    (TYPE, ENQUEUE_TIMESTAMP, ZONE, IS_ACTIVE, IS_CRITICAL) [name: 'cron_index']
+    PATIENT_ID [name: 'patient_index']
+    TYPE [name: 'type_index']
+    (TYPE, ZONE) [name: 'type_zone_index']
+  }
+}
+
+Table ALLOTMENT {
+  ID long [PK]
+  QUEUE_ID long
+  PATIENT_ID long
+  HOSPITAL_ID varchar(100) [not null]
+  BED_TYPE varchar(50)
+  REQUEST_TIME timestamp
+  ALLOCATION_TIME timestamp [default: `now()`]
+  IS_CRITICAL boolean [not null]
+  ZONE varchar(100)
+
+}
+
+Table PATIENT {
+  PATIENT_ID long
+  BU_NUMBER long
+  CONTACT_NUMBER varchar(100)
+  ICMR_NUMBER varchar(100)
+  AGE integer
+  GENDER varchar(10)
+  ZONE varchar(100)
+}
+
+Ref: PATIENT.PATIENT_ID < QUEUE.PATIENT_ID
+Ref: ALLOTMENT.QUEUE_ID - QUEUE.ID
+Ref: ALLOTMENT.PATIENT_ID - PATIENT.PATIENT_ID
