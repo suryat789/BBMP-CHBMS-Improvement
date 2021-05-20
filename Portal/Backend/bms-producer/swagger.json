@@ -1,0 +1,357 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Sample Implicit Flow OAuth2 Project",
+        "description": "This is an example of using OAuth2 Implicit Flow in a specification to describe security to your API.",
+        "contact": {},
+        "license": {
+            "url": "http://unlicense.org"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://20.198.106.65:8080",
+            "description": "Inferred Url"
+        }
+    ],
+    "tags": [
+        {
+            "name": "hospital-api-controller",
+            "description": "Hospital Api Controller"
+        },
+        {
+            "name": "patient-api-controller",
+            "description": "Patient Api Controller"
+        }
+    ],
+    "paths": {
+        "/gok/bms/1.0.0/hospital": {
+            "post": {
+                "tags": [
+                    "hospital-api-controller"
+                ],
+                "summary": "Add/Update Hospital Details",
+                "description": "This api is to add hospital details to the system",
+                "operationId": "hospitalPostUsingPOST",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Hospitals"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hospitals"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hospitals"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "Error-ModelName{namespace='org.bbmp.chbms.model', name='ErrorResponse'}"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "Error-ModelName{namespace='org.bbmp.chbms.model', name='ErrorResponse'}"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "implicit": [
+                            "write",
+                            "read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/gok/bms/1.0.0/hospital/all": {
+            "post": {
+                "tags": [
+                    "hospital-api-controller"
+                ],
+                "summary": "Add all Hospital Details",
+                "description": "This api is to add Multiple hospital details to the system",
+                "operationId": "hospitalAllPostUsingPOST",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Hospitals"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Hospitals"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "Error-ModelName{namespace='org.bbmp.chbms.model', name='ErrorResponse'}"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "Error-ModelName{namespace='org.bbmp.chbms.model', name='ErrorResponse'}"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "implicit": [
+                            "write",
+                            "read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/gok/bms/1.0.0/patient": {
+            "post": {
+                "tags": [
+                    "patient-api-controller"
+                ],
+                "summary": "Add Patient Details",
+                "description": "This api is to add patient details to the system",
+                "operationId": "patientPostUsingPOST",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Patients"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Patients"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Patients"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "Error-ModelName{namespace='org.bbmp.chbms.model', name='ErrorResponse'}"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "Error-ModelName{namespace='org.bbmp.chbms.model', name='ErrorResponse'}"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "implicit": [
+                            "write",
+                            "read"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Beds": {
+                "title": "Beds",
+                "type": "object",
+                "properties": {
+                    "bedType": {
+                        "type": "string"
+                    },
+                    "blocked": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "capacity": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "occupied": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "vacant": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Hospitals": {
+                "title": "Hospitals",
+                "type": "object",
+                "properties": {
+                    "beds": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Beds"
+                        }
+                    },
+                    "hospitalAddress": {
+                        "type": "string"
+                    },
+                    "hospitalId": {
+                        "type": "string"
+                    },
+                    "hospitalName": {
+                        "type": "string"
+                    },
+                    "hospitalPhoneNumber": {
+                        "type": "string"
+                    },
+                    "hospitalStatus": {
+                        "type": "string"
+                    },
+                    "hospitalType": {
+                        "type": "string"
+                    },
+                    "pincode": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "zone": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Patients": {
+                "title": "Patients",
+                "type": "object",
+                "properties": {
+                    "bucode": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "patientId": {
+                        "type": "string"
+                    },
+                    "patientStatus": {
+                        "type": "string"
+                    },
+                    "phoneLastFour": {
+                        "type": "string"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "queueType": {
+                        "type": "string"
+                    },
+                    "srfNumber": {
+                        "type": "string"
+                    },
+                    "timeAddedToQueue": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "zone": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
