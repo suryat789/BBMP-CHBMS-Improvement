@@ -84,7 +84,7 @@ $empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.updated_on,c2.name,c2.t
         $data[$key]['occupied'] = $val['occupied'];	
         $data[$key]['type'] = $val['type'];
         $data[$key]['phone'] = $val['phone'];	
-        $data[$key]['updated_on'] = $val['updated_on'];	
+        $data[$key]['updated_on'] = date('d/m/Y h:i A', strtotime($val['updated_on']));		
 		 }
 		}
 

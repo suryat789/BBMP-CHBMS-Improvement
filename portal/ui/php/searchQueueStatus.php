@@ -9,21 +9,26 @@
     $query->bind_param('ss', $buCode,$phone);
     $query->execute();
     $data = array(); 
-    if ($result = $query->get_result()) {              
+    if ($result = $query->get_result()) {   
+                 
         if ($result->num_rows > 0) {
                       
             while($row = $result->fetch_assoc()) 
             {
+               
                 //$data['bucode'] = $row["bucode"];
                 $data['id'] = $row["id"];
                 $data['srfnumber'] = $row["srf_number"];
                 $data['queue_type'] = $row["queue_type"];
-                $data['earliest'] = $row["queue_position"]+1; 
+                $data['queue_position'] = $row["queue_position"]+1; 
                 $data['queue_name'] = $row["queue_name"];
                 $data['zone'] = $row["zone"];                        
             }
         }
     } 
+
+    
+
     echo json_encode($data);
   
 ?>

@@ -51,8 +51,8 @@
       <!-- router contents -->
 
       <div class="card-body">
-        <h4 class="cs-card-title">Patient Queue Status <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']); ?>
-            <!--<span class="jk-refresh-icon">
+        <h4 class="cs-card-title">Patient Queue Status <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?>
+                  <!--<span class="jk-refresh-icon">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
                 <path d="M0 0h24v24H0V0z" fill="none" />
                 <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
@@ -77,18 +77,14 @@
             <form name="myForm" class="row g-3 needs-validation cs-card1-form jk-dashboard-form" novalidate>
               <div class="col-md-3 jk-no-padding-left">
                 <!-- <label for="validationCustom01" class="form-label">First name</label> -->
-                <input type="text" name="buNumber" class="form-control" id="validationCustom01" placeholder="BU/TBU Number (eg BU-123456)" required>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
+                <input type="text" name="buNumber"  class="form-control" id="validationCustom01" placeholder="BU/TBU Number (eg BU-123456)" required>
+                
               </div>
               <div class="col-md-3 jk-no-padding-left">
                 <!-- <label for="validationCustom02" class="form-label">Last name</label> -->
                 <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
                 <input type="text" name="mobNumber" class="form-control" id="validationCustom03" placeholder="Last 4 digit of registered Mobile Number" required>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
+                
               </div>
 
               <div class="col-md-3 jk-no-padding-left">
@@ -114,10 +110,10 @@
             <!-- search result  -->
             <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-search-result" id="jk-search-result-element">
               <div class="jk-search-response-holder">
-                <div class="jk-search-response-label lbqType">
-                </div>
-                <div class="jk-search-response-value qType">
-
+                <!-- <div class="jk-search-response-label lbqType">                 
+                </div> -->
+                <div class="qType">
+                  
                 </div>
               </div>
               <div class="jk-search-response-holder">
@@ -139,59 +135,59 @@
               </div>
               <div class="jk-search-response-holder">
                 <div class="jk-search-response-value" id="notfound">
-                  Data not found!
-                </div>
+                No result found!               
+                </div>                
               </div>
             </div>
             <!-- search result  -->
           </div>
         </div>
-        <!--card 1 search contents-->
-        <?php foreach ($data as $key => $dataVal) { ?>
+        <!--card 1 search contents-->        
+        <?php foreach ($data as $key=>$dataVal) { ?>
+        
+        <!-- card 2 patient waiting for doctors contents -->
+        <div class="cs-white-cards" style="margin-top: 2%;">
+          <h6 class="card-title  jk-font-bold">No. of Patients Waiting in the <?php echo $key;?> Queue</h6>
+          <div class="row" id="cs-doctor-consultations-card">
+            <?php             
+            foreach ($dataVal as $key1=>$dataVal1) { ?>
+              <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-zone-card" data-zone_type="<?php echo $dataVal1['queue_name'];?>">
+                <h6 data-zone_type="<?php echo $dataVal1['queue_name']; ?>"><?php echo $dataVal1['queue_name']; ?></h6>
+                <h3 data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-bold"><?php echo $dataVal1['total']; ?></h3>
+                <p>
+                  <small>
+                  <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-color-grey" style="display:inline-block;">Next in Line</span>
+                    <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" style="display:inline-block;"><?php echo $dataVal1['bucode']; ?>
+                    <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-timeperiod-element">(
+                      <?php                      
+                        $currentdate =  strtotime(date('Y-m-d H:i:s'));
+                        $createdDate =   strtotime($dataVal1['time_added_to_queue']);
+                        $difference  =  $currentdate - $createdDate;
+                        $minutes =  floor($difference/(60));
+                        $hours = floor($difference/(60*60));
+                        $days = floor($difference/(60*60*24));
 
-          <!-- card 2 patient waiting for doctors contents -->
-          <div class="cs-white-cards" style="margin-top: 2%;">
-            <h6 class="card-title  jk-font-bold">No. of Patients Waiting in the <?php echo $key; ?> Queue</h6>
-            <div class="row" id="cs-doctor-consultations-card">
-              <?php
-              foreach ($dataVal as $key1 => $dataVal1) { ?>
-                <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-zone-card" data-zone_type="<?php echo $dataVal1['queue_name']; ?>">
-                  <h6 data-zone_type="<?php echo $dataVal1['queue_name']; ?>"><?php echo $dataVal1['queue_name']; ?></h6>
-                  <h3 data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-bold"><?php echo $dataVal1['total']; ?></h3>
-                  <p>
-                    <small>
-                      <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-color-grey" style="display:inline-block;">Next in Line</span>
-                      <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" style="display:inline-block;"><?php echo $dataVal1['bucode']; ?>
-                        <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-timeperiod-element">
-                          <?php
-                          $currentdate =  strtotime(date('Y-m-d H:i:s'));
-                          $createdDate =   strtotime($dataVal1['time_added_to_queue']);
-                          $difference  =  $currentdate - $createdDate;
-                          $minutes =  floor($difference / (60));
-                          $hours = floor($difference / (60 * 60));
-                          $days = floor($difference / (60 * 60 * 24));
-
-                          if ($minutes < 60) {
-                            echo $minutes . ' Mnts';
-                          } elseif ($hours <= 24) {
-                            echo $hours . ' Hr';
-                          } else {
+                        if($minutes <60){
+                            echo $minutes .' Mnts';
+                        }elseif($hours <=24){
+                        echo $hours .' Hr';    
+                        }else{
                             echo $days . ' Days';
-                          }
-                          ?> Ago
-                        </span>
+                        }
+                        ?> Ago)
                       </span>
-                    </small>
-                  </p>
-                </div>
-              <?php } ?>
-            </div>
+                    </span>
+                  </small>
+                </p>
+              </div>
+            <?php } ?>
           </div>
-        <?php } ?>
+        </div>
+        <?php }?>
 
         <!-- card 2 patient waiting for doctors contents -->
         <!-- card 3 patient waiting contents -->
-
+        
         <div class="alert alert-primary jk-alert-danger" role="alert">
           <span class="jk-info-icon"> <svg class="MuiSvgIcon-root-603" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="none" d="M0 0h24v24H0z"></path>
@@ -209,14 +205,13 @@
   </div>
   <!-- Scripts contents -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </script>
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
   </script>
-
+ 
 
   <script src="js/scripts.js"></script>
 
   <!-- Scripts contents -->
 </body>
-
 </html>

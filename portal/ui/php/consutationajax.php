@@ -1,6 +1,6 @@
 <?php 
 include('connection.php');
-$pagetype = $_GET['patientpage'];
+$pagetype = urldecode($_GET['patientpage']);
 ## Read value
 if($pagetype=="")
 {
@@ -23,7 +23,7 @@ if($searchValue != ''){
         bucode like '%".$searchValue."%' or 
         srf_number like'%".$searchValue."%' ) ";
 }
-//echo $searchQuery;exit;
+
 ## Total number of records without filtering
     $selWithoutFilter = "select count(*) as allcount from patient where queue_name= ? ";    
     $stmt = $mysqli->prepare($selWithoutFilter);
@@ -49,7 +49,7 @@ $stmt->close();
 
 if($columnName=="")
 {
-  $columnName = "bucode";
+  $columnName = "time_added_to_queue";
 
 }
 if($columnSortOrder=="")
@@ -68,28 +68,29 @@ $rowperpage = 10;
 
 ## Fetch records
 
- $empQuery = "select INSERT(bucode, 3, 4, '****') as bucode, INSERT(srf_number, 3, 4, '***') as srf_number,patient_id,time_added_to_queue from patient where queue_name= ? ".$searchQuery ." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
- //echo preparedQuery($empQuery,array($pagetype));	
+ $empQuery = "select  bucode, srf_number,patient_id,time_added_to_queue from patient where queue_name= ? ".$searchQuery ." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+ 	
  $stmt = $mysqli->prepare($empQuery);
   $stmt->bind_param("s", $pagetype);		
 		$stmt->execute();	
-//echo mysqli_prepared_query($mysqli,$empQuery,"s",$pagetype) ;
- 
+
 		$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);	
-    	
+    $data = array();	
+    
 		if($stmt->affected_rows>0) {
-			$data = array();	
+      $i =1;
 		 foreach($result as $key => $val){
-				$data[$key]['patient_id'] = $val['patient_id'];
+				$data[$key]['patient_id'] = $i;
 				$data[$key]['bucode'] = $val['bucode'];
         $data[$key]['srf_number'] = $val['srf_number'];	
-        $data[$key]['time_added_to_queue'] = $val['time_added_to_queue'];	
+        $data[$key]['time_added_to_queue'] = date('d/m/Y h:i A', strtotime($val['time_added_to_queue']));	
+        $i++;
 		 }
 		}
 
 		$stmt->close();
    
-
+    
 ## Response
 $response = array(
   "draw" => intval($draw),

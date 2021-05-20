@@ -2,9 +2,7 @@
 <html lang="en">
 <?php include('php/queue.php'); ?>
 <?php
-$pagetype = $_GET['type'];
-
-
+$pagetype = urldecode($_GET['type']);
 if ($pagetype == "") {
   $pagetype = "Zone 1";
 }
@@ -68,9 +66,9 @@ if ($pagetype == "") {
         <- Back </a>
           <div class="card-body">
             <h4 class="cs-card-title">
-              <? php ?>
-              Doctors Consultation Queue- <?php echo $pagetype ?>
-              <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']); ?>
+            <?php?>
+            Doctors Consultation Queue- <?php echo $pagetype ?>
+              <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?>
             </h4>
 
             <!-- card 2 patient waiting for doctors contents -->
