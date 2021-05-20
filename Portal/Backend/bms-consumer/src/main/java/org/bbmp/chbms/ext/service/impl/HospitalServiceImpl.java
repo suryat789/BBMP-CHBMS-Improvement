@@ -24,8 +24,10 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.EmitterProcessor;
 
 import java.time.Instant;
 import java.util.*;
@@ -47,13 +49,15 @@ public class HospitalServiceImpl extends org.bbmp.chbms.service.impl.HospitalSer
     private final HospitalMapper hospitalMapper;
     private HospitalAuditService hospitalAuditService;
     private BedAuditService bedAuditService;
+    private EmitterProcessor<Message<Map>> emitterProcessor;
 
-    public HospitalServiceImpl(HospitalRepository hospitalRepository, HospitalMapper hospitalMapper, HospitalAuditService hospitalAuditService, BedAuditService bedAuditService) {
+    public HospitalServiceImpl(HospitalRepository hospitalRepository, HospitalMapper hospitalMapper, HospitalAuditService hospitalAuditService, BedAuditService bedAuditService, EmitterProcessor<Message<Map>> emitterProcessor) {
         super(hospitalRepository, hospitalMapper);
         this.hospitalRepository = hospitalRepository;
         this.hospitalMapper = hospitalMapper;
         this.hospitalAuditService = hospitalAuditService;
         this.bedAuditService = bedAuditService;
+        this.emitterProcessor = emitterProcessor;
     }
 
     @Autowired
@@ -75,14 +79,15 @@ public class HospitalServiceImpl extends org.bbmp.chbms.service.impl.HospitalSer
     public synchronized Consumer<Message<Map>> consumeHospitalBed() {
         return message -> {
             log.info("Hospital Event Received '{}'", message);
-            HospitalDTO hospitalDTO = mapToDTO(message.getPayload());
             try {
+                HospitalDTO hospitalDTO = mapToDTO(message.getPayload());
                 hospitalDTO = save(hospitalDTO);
                 HospitalAuditDTO hospitalAuditDTO = mapToAuditDTO(hospitalDTO);
                 hospitalAuditService.save(hospitalAuditDTO);
                 updateBeds(message.getPayload(), hospitalDTO);
-            } catch (DataIntegrityViolationException ex) {
+            } catch (Exception ex) {
                 log.error(ex.getMessage(), ex);
+                emitterProcessor.onNext(MessageBuilder.withPayload((Map) Map.of("exception", ex.getMessage(), "message", message)).build());
             }
         };
     }
@@ -153,15 +158,9 @@ public class HospitalServiceImpl extends org.bbmp.chbms.service.impl.HospitalSer
             bedDTO.setUpdatedOn(Instant.now());
             bedDTO.setUpdatedByMsgId(hospitalDTO.getUpdatedByMsgId());
 
-            try{
-                bedDTO = bedService.save(bedDTO);
-                BedAuditDTO bedAuditDTO = mapToAuditDTO(bedDTO);
-                bedAuditService.save(bedAuditDTO);
-            }
-            catch (DataIntegrityViolationException ex){
-                log.error(ex.getMessage(), ex);
-            }
-
+            bedDTO = bedService.save(bedDTO);
+            BedAuditDTO bedAuditDTO = mapToAuditDTO(bedDTO);
+            bedAuditService.save(bedAuditDTO);
         });
     }
 

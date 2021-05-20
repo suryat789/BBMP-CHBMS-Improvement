@@ -66,12 +66,12 @@ public class PatientServiceImpl extends org.bbmp.chbms.service.impl.PatientServi
     public synchronized Consumer<Message<Map>> consumePatient() {
         return message -> {
             log.info("Patient Event Received'{}'", message);
-            PatientDTO patientDTO = mapToDTO(message.getPayload());
             try {
+                PatientDTO patientDTO = mapToDTO(message.getPayload());
                 patientDTO = save(patientDTO);
                 PatientAuditDTO patientAuditDTO = mapToAuditDTO(patientDTO);
                 patientAuditService.save(patientAuditDTO);
-            } catch (DataIntegrityViolationException ex) {
+            } catch (Exception ex) {
                 log.error(ex.getMessage(), ex);
                 emitterProcessor.onNext(MessageBuilder.withPayload((Map) Map.of("exception", ex.getMessage(), "message", message)).build());
             }
