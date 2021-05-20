@@ -4,31 +4,26 @@
   
     $buCode = $_POST['buCode'];
     $phone = $_POST['phone'];
-    $query1="select id, INSERT(bucode, 3, 4, '****') as bucode, queue_name ,zone, srf_number, queue_type, min(time_added_to_queue) as earliest FROM `patient` WHERE bucode = ? and phone = ?";
-	
+    $query1="select p1.id, p1.bucode,p1.queue_name,p1.queue_type,p1.srf_number,p1.zone, (SELECT count(*) FROM patient p2 where p2.queue_name = p1.queue_name and p2.queue_type = p1.queue_type and p2.time_added_to_queue < p1.time_added_to_queue) AS queue_position from patient p1 where p1.bucode = ? and p1.phone = ? ";	
     $query = $mysqli->prepare($query1);
     $query->bind_param('ss', $buCode,$phone);
     $query->execute();
+    $data = array(); 
     if ($result = $query->get_result()) {              
         if ($result->num_rows > 0) {
-            $data = array();
-            
+                      
             while($row = $result->fetch_assoc()) 
             {
-                $data['bucode'] = $row["bucode"];
+                //$data['bucode'] = $row["bucode"];
                 $data['id'] = $row["id"];
                 $data['srfnumber'] = $row["srf_number"];
                 $data['queue_type'] = $row["queue_type"];
-                $data['earliest'] = $row["earliest"]; 
+                $data['earliest'] = $row["queue_position"]+1; 
                 $data['queue_name'] = $row["queue_name"];
                 $data['zone'] = $row["zone"];                        
             }
         }
-    }
-    
-
-    
-    $jsonData = json_encode($data);
-    echo $jsonData;
-    exit;
+    } 
+    echo json_encode($data);
+  
 ?>

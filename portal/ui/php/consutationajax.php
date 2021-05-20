@@ -68,7 +68,7 @@ $rowperpage = 10;
 
 ## Fetch records
 
- $empQuery = "select * from patient where queue_name= ? ".$searchQuery ." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+ $empQuery = "select INSERT(bucode, 3, 4, '****') as bucode, INSERT(srf_number, 3, 4, '***') as srf_number,patient_id,time_added_to_queue from patient where queue_name= ? ".$searchQuery ." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
  //echo preparedQuery($empQuery,array($pagetype));	
  $stmt = $mysqli->prepare($empQuery);
   $stmt->bind_param("s", $pagetype);		

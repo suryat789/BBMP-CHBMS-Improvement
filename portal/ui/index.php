@@ -143,62 +143,52 @@
             <!-- search result  -->
           </div>
         </div>
-        <!-- card 1 search contents -->
-
+        <!--card 1 search contents-->        
+        <?php foreach ($data as $key=>$dataVal) { ?>
+        
         <!-- card 2 patient waiting for doctors contents -->
         <div class="cs-white-cards" style="margin-top: 2%;">
-          <h6 class="card-title  jk-font-bold">Patients Waiting For Triage </h6>
+          <h6 class="card-title  jk-font-bold">No. of Patients Waiting in the <?php echo $key;?> Queue</h6>
           <div class="row" id="cs-doctor-consultations-card">
-            <?php for ($i = 0; $i < count($data); $i++) { ?>
-              <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-zone-card" data-zone_type="<?php echo $data[$i]['queue_name']; ?>">
-                <h6 data-zone_type="<?php echo $data[$i]['queue_name']; ?>"><?php echo $data[$i]['queue_name']; ?></h6>
-                <h3 data-zone_type="<?php echo $data[$i]['queue_name']; ?>" class="jk-font-bold"><?php echo $data[$i]['total']; ?></h3>
+            <?php             
+            foreach ($dataVal as $key1=>$dataVal1) { ?>
+              <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-zone-card" data-zone_type="<?php echo $dataVal1['queue_name'];?>">
+                <h6 data-zone_type="<?php echo $dataVal1['queue_name']; ?>"><?php echo $dataVal1['queue_name']; ?></h6>
+                <h3 data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-bold"><?php echo $dataVal1['total']; ?></h3>
                 <p>
                   <small>
-                    <span data-zone_type="<?php echo $data[$i]['queue_name']; ?>" class="jk-font-color-grey" style="display:inline-block;">Last Consultation</span>
-                    <span data-zone_type="<?php echo $data[$i]['queue_name']; ?>" style="display:inline-block;"><?php echo $data[$i]['bucode']; ?>
-                      <span data-zone_type="<?php echo $data[$i]['queue_name']; ?>" class="jk-timeperiod-element">
-                        (10 min ago)
+                  <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-color-grey" style="display:inline-block;">Next in Line</span>
+                    <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" style="display:inline-block;"><?php echo $dataVal1['bucode']; ?>
+                    <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-timeperiod-element">
+                      <?php                      
+                        $currentdate =  strtotime(date('Y-m-d H:i:s'));
+                        $createdDate =   strtotime($dataVal1['time_added_to_queue']);
+                        $difference  =  $currentdate - $createdDate;
+                        $minutes =  floor($difference/(60));
+                        $hours = floor($difference/(60*60));
+                        $days = floor($difference/(60*60*24));
+
+                        if($minutes <60){
+                            echo $minutes .' Mnts';
+                        }elseif($hours <=24){
+                        echo $hours .' Hr';    
+                        }else{
+                            echo $days . ' Days';
+                        }
+                        ?> Ago
                       </span>
                     </span>
                   </small>
                 </p>
-
               </div>
             <?php } ?>
           </div>
-
-
         </div>
+        <?php }?>
 
         <!-- card 2 patient waiting for doctors contents -->
         <!-- card 3 patient waiting contents -->
-        <div class="cs-white-cards" style="margin-top: 2%;">
-          <h6 class="card-title jk-font-bold">Patients Waiting For Beds</h6>
-          <div class="row" id="cs-doctor-consultations-card">
-            <?php for ($j = 0; $j < count($pdata); $j++) { ?>
-              <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-bed-card" data-patb_type="<?php echo $pdata[$j]['queue_name']; ?>">
-                <h6 data-patb_type="<?php echo $pdata[$j]['queue_name']; ?>"><?php echo $pdata[$j]['queue_name']; ?></h6>
-                <h3 data-patb_type="<?php echo $pdata[$j]['queue_name']; ?>" class="jk-font-bold"><?php echo $pdata[$j]['total']; ?></h3>
-                <p>
-                  <small>
-                    <span data-patb_type="<?php echo $pdata[$j]['queue_name']; ?>" class="jk-font-color-grey" style="display:inline-block;">Last Consultation</span>
-                    <span data-patb_type="<?php echo $pdata[$j]['queue_name']; ?>" style="display:inline-block;"><?php echo $pdata[$j]['bucode']; ?>
-                      <span data-patb_type="<?php echo $pdata[$j]['queue_name']; ?>" class="jk-timeperiod-element">
-                        (1 hr ago)
-                      </span>
-                    </span>
-                  </small>
-                </p>
-
-              </div>
-
-            <?php } ?>
-
-
-          </div>
-
-        </div>
+        
         <div class="alert alert-primary jk-alert-danger" role="alert">
           <span class="jk-info-icon"> <svg class="MuiSvgIcon-root-603" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="none" d="M0 0h24v24H0z"></path>
@@ -225,5 +215,4 @@
 
   <!-- Scripts contents -->
 </body>
-
 </html>

@@ -64,7 +64,9 @@ if ($pagetype == "") {
       <a class="btn-group jk-btn-back jk-home-link" role="group" aria-label="...">
         <- Back </a>
           <div class="card-body">
-            <h4 class="cs-card-title">Doctors Consultation Queue- <?php echo $pagetype ?>
+            <h4 class="cs-card-title">
+            <?php?>
+            Doctors Consultation Queue- <?php echo $pagetype ?>
               <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?>
             </h4>
 
