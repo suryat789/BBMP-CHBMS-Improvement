@@ -2,6 +2,7 @@ package org.bbmp.chbms.configuration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.threetenbp.ThreeTenModule;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,7 @@ public class JacksonConfiguration {
   @Primary
   public ObjectMapper objectMapper() {
     return new ObjectMapper()
-            .disable(DeserializationFeature.ACCEPT_FLOAT_AS_INT);
+            .disable(DeserializationFeature.ACCEPT_FLOAT_AS_INT)
+	    .registerModule(new JavaTimeModule());
   }
 }
