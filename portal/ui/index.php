@@ -96,6 +96,9 @@
                 Note:
               </div>
               <div>
+                • This is only for patients who require hospitalization.
+              </div>
+              <div>
                 • Enter your BU Number and the last 4 digits of your registered phone number to look up your
                 status in the queue.
               </div>
@@ -198,8 +201,9 @@
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
               </path>
             </svg></span>
-          If you are in the queue and situation deteriorating, call 1912. Doctors will assess if you need to urgent
-          attention and move you to the critical queue. This is only for patients who require hospitalisation.
+          <!--If you are in the queue and situation deteriorating, call 1912. Doctors will assess if you need to urgent
+          attention and move you to the critical queue. This is only for patients who require hospitalisation.-->
+          If you are in the triaging queue and your condition is deteriorating, call 1912 immediately. Doctors will assess if you need urgent attention and move you to the ER Queue (Emergency Response queue).
         </div>
         <!-- card 3 patient waiting contents -->
         <button onclick="topFunction()" id="myBtn" title="Go to top" style="display: none;">Top</button>
