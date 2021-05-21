@@ -31,9 +31,7 @@ if ($pagetype == "") {
 
   <!-- Datatable JS -->
   <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <style>
-.dataTables_filter, .dataTables_info, .dataTables_length { display: none; }
-</style>
+ 
 </head>
 
 <body>

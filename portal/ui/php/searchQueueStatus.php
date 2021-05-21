@@ -15,9 +15,8 @@
                       
             while($row = $result->fetch_assoc()) 
             {
-               
-                //$data['bucode'] = $row["bucode"];
                 $data['id'] = $row["id"];
+                $data['bucode'] = $row["bucode"];                
                 $data['srfnumber'] = $row["srf_number"];
                 $data['queue_type'] = $row["queue_type"];
                 $data['queue_position'] = $row["queue_position"]+1; 
@@ -26,9 +25,10 @@
             }
         }
     } 
-
+    
     
 
     echo json_encode($data);
+    exit;
   
 ?>
