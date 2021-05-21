@@ -60,7 +60,7 @@
             </span>
          <span class="jk-refresh-text cs-primary">Refresh</span>-->
         </h4>
-        <div class="alert alert-primary jk-alert-danger" role="alert">
+        <!--<div class="alert alert-primary jk-alert-danger" role="alert">
           <span class="jk-info-icon"> <svg class="MuiSvgIcon-root-603" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="none" d="M0 0h24v24H0z"></path>
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
@@ -68,7 +68,7 @@
             </svg></span>
           This is only for patients who require hospitalisation. If you are not already on the queue and require
           hospitalisation then call 1912.
-        </div>
+        </div>-->
         <!-- card 1 search contents -->
         <div class="cs-white-cards">
           <div class="card-body">
@@ -199,7 +199,7 @@
               </path>
             </svg></span>
           If you are in the queue and situation deteriorating, call 1912. Doctors will assess if you need to urgent
-          attention and move you to the critical queue
+          attention and move you to the critical queue. This is only for patients who require hospitalisation.
         </div>
         <!-- card 3 patient waiting contents -->
         <button onclick="topFunction()" id="myBtn" title="Go to top" style="display: none;">Top</button>
