@@ -3,6 +3,7 @@
 <?php include('php/queue.php'); ?>
 <?php
 $pagetype = urldecode($_GET['type']);
+$cat = $_GET['category'];
 if ($pagetype == "") {
   $pagetype = "Zone 1";
 }
@@ -30,6 +31,9 @@ if ($pagetype == "") {
 
   <!-- Datatable JS -->
   <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <style>
+.dataTables_filter, .dataTables_info, .dataTables_length { display: none; }
+</style>
 </head>
 
 <body>
@@ -67,7 +71,7 @@ if ($pagetype == "") {
           <div class="card-body">
             <h4 class="cs-card-title">
             <?php?>
-            Doctors Consultation Queue- <?php echo $pagetype ?>
+            <?php echo $cat;?> Queue- <?php echo $pagetype ?>
               <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?>
             </h4>
 

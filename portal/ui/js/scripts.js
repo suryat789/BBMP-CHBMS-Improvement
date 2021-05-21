@@ -52,8 +52,10 @@ document.querySelectorAll('.jk-zone-card').forEach(element => element.addEventLi
   // do something
   console.log(event);
   var zonetype = event.target.getAttribute("data-zone_type");
+  var cat = document.getElementById("category"+zonetype).value;
+  //alert(cat);
     
-  window.location.href = 'BBMPDoctorsConsultationQueue.php?type='+ zonetype;
+  window.location.href = 'BBMPDoctorsConsultationQueue.php?type='+ zonetype+'&category='+cat;
 }));
 document.querySelectorAll('.jk-bed-card').forEach(element => element.addEventListener('click', function (event) {
   // do something  

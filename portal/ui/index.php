@@ -143,7 +143,9 @@
           </div>
         </div>
         <!--card 1 search contents-->        
-        <?php foreach ($data as $key=>$dataVal) { ?>
+        <?php foreach ($data as $key=>$dataVal) {
+          $cate= $key;
+          ?>
         
         <!-- card 2 patient waiting for doctors contents -->
         <div class="cs-white-cards" style="margin-top: 2%;">
@@ -151,7 +153,9 @@
           <div class="row" id="cs-doctor-consultations-card">
             <?php             
             foreach ($dataVal as $key1=>$dataVal1) { ?>
-              <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-zone-card" data-zone_type="<?php echo $dataVal1['queue_name'];?>">
+              
+              <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-zone-card" data-zone_type="<?php echo $dataVal1['queue_name']?>">
+              <input type="hidden" id="category<?php echo $dataVal1['queue_name']?>" value="<?php echo $cate;?>">
                 <h6 data-zone_type="<?php echo $dataVal1['queue_name']; ?>"><?php echo $dataVal1['queue_name']; ?></h6>
                 <h3 data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-bold"><?php echo $dataVal1['total']; ?></h3>
                 <p>
