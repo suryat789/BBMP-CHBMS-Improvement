@@ -23,7 +23,7 @@ jobs:
     - name: docker build
       working-directory: ./Portal/Backend/bms-producer
       run: |
-        docker build . -t egovio/bbmp-producer:latest
+        docker build . -t nikeshumredkar/bbmp-producer:latest
 
     - name: docker push
       run: |
