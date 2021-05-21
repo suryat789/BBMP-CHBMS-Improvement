@@ -27,4 +27,4 @@ jobs:
 
     - name: docker push
       run: |
-        docker push egovio/bbmp-producer:latest
+        docker push nikeshumredkar/bbmp-producer:latest
