@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Kolkata');
 if($_SERVER['HTTP_HOST'] == 'localhost')
 {
-   //echo "Connection to server sucessfully"; 
+   echo "Connection to server sucessfully"; 
 
    //Connecting to Redis server on localhost 
   // $redis = new Redis(); 
@@ -32,10 +32,16 @@ else {
          //check whether server is running or not 
      echo "Server is running: ".$redis->ping(); */
 
-	$dbservertype='mysqli';
-	$servername='chbms-db.mysql.database.azure.com';
-	$dbuser='dbadmin@chbms-db';
-	$dbpassword='eGovCa$hc0w';
+	// $dbservertype='mysqli';
+	// $servername='chbms-db.mysql.database.azure.com';
+	// $dbuser='dbadmin@chbms-db';
+	// $dbpassword='eGovCa$hc0w';
+	// $dbname='chbms'; 
+
+  $dbservertype='mysqli';
+	$servername='bbmp-db.mysql.database.azure.com';
+	$dbuser='dbadmin@bbmp-db';
+	$dbpassword='bbmpadmin@4321';
 	$dbname='chbms'; 
 
 

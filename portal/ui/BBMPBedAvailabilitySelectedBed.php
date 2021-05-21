@@ -128,7 +128,6 @@ if ($pagetype == "") {
                 <div class="table-responsive">
 
                   <table id='empTable' class="table table-striped table-bordered nowrap" style="width:100%">
-
                     <thead>
                       <tr>
                         <th>Hospital Name</th>

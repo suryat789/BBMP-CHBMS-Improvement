@@ -67,12 +67,10 @@ $rowperpage = 10;
 ## Fetch records
 $empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.updated_on,c2.name,c2.type,c2.phone from bed as c1,hospital
  as  c2 where c1.type = ?  and c1.hospital_id = c2.id ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
- //echo preparedQuery($empQuery,array($pagetype));	
+ 	
  $stmt = $mysqli->prepare($empQuery);
   $stmt->bind_param("s", $pagetype);		
-		$stmt->execute();	
-//echo mysqli_prepared_query($mysqli,$empQuery,"s",$pagetype) ;
- 
+		$stmt->execute();
 		$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);	
     	
 		if($stmt->affected_rows>0) {

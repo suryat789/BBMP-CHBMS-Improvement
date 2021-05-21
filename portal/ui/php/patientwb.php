@@ -14,7 +14,5 @@
 					$pdata[$key]['time_added_to_queue'] = $val['time_added_to_queue'];
 			}
 		}
-
-		
 		$stmt->close();
 ?>

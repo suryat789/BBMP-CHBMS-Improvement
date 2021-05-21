@@ -70,7 +70,7 @@ if ($pagetype == "") {
         <- Back </a>
           <div class="card-body">
             <h4 class="cs-card-title">
-            <?php?>
+            
             <?php echo $cat;?> Queue- <?php echo $pagetype ?>
               <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?>
             </h4>

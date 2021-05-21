@@ -53,8 +53,6 @@ document.querySelectorAll('.jk-zone-card').forEach(element => element.addEventLi
   console.log(event);
   var zonetype = event.target.getAttribute("data-zone_type");
   var cat = document.getElementById("category"+zonetype).value;
-  //alert(cat);
-    
   window.location.href = 'BBMPDoctorsConsultationQueue.php?type='+ zonetype+'&category='+cat;
 }));
 document.querySelectorAll('.jk-bed-card').forEach(element => element.addEventListener('click', function (event) {
@@ -86,6 +84,11 @@ document.querySelectorAll('.jk-bed-faq').forEach(element => element.addEventList
   // do something
   console.log(event);
   window.location.href = "FAQ.php#";
+}));
+document.querySelectorAll('.jk-bed-contact').forEach(element => element.addEventListener('click', function (event) {
+  // do something
+  console.log(event);
+  window.location.href = "BBMPContact.php#";
 }));
 
 document.querySelectorAll('.jk-bed-available').forEach(element => element.addEventListener('click', function (event) {

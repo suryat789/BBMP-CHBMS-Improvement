@@ -42,7 +42,6 @@ if ($pagetype == "") {
 
   <div class="cs-card-body">
 
-
     <div class="card ">
 	<!-- Commit Test -->
       <!-- router contents -->
@@ -57,6 +56,9 @@ if ($pagetype == "") {
           <li class="nav-item">
             <a class="nav-link jk-bed-faq " href="#">FAQ</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link jk-bed-contact" href="#">Contact</a>
+          </li>
         </ul>
       </div>
       <!-- router contents -->
@@ -69,8 +71,6 @@ if ($pagetype == "") {
 
             </h4>
 
-
-
             <!-- card 2 patient waiting for doctors contents -->
             <div class="cs-white-cards" style="margin-top: 2%;">
               <div class="container-fluid">
@@ -79,16 +79,13 @@ if ($pagetype == "") {
                   <table id='empTable' class="table table-striped table-bordered nowrap" style="width:100%">
                     <thead>
                       <tr>
-
                         <th scope="col">Queue No.</th>
                         <th scope="col">BU Number</th>
                         <th scope="col">SRF Number.</th>
                         <th scope="col">Added on</th>
-
                       </tr>
                     </thead>
                   </table>
-
                 </div>
               </div>
             </div>
