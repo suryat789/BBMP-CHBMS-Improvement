@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Kolkata');
 if($_SERVER['HTTP_HOST'] == 'localhost')
 {
-   echo "Connection to server sucessfully"; 
+   //echo "Connection to server sucessfully"; 
 
    //Connecting to Redis server on localhost 
   // $redis = new Redis(); 
