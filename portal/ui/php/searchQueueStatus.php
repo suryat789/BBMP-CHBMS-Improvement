@@ -1,7 +1,6 @@
 <?php
  header('Content-type: application/json');
-   include('connection.php'); 
-  
+   include('connection.php');  
     $buCode = $_POST['buCode'];
     $phone = $_POST['phone'];   
     $query1="select p1.id, p1.bucode,p1.queue_name,p1.queue_type,p1.srf_number,p1.zone, (SELECT count(*) FROM patient p2 where p2.queue_name = p1.queue_name and p2.queue_type = p1.queue_type and p2.time_added_to_queue < p1.time_added_to_queue) AS queue_position from patient p1 where p1.bucode = ? and p1.phone = ? ";	

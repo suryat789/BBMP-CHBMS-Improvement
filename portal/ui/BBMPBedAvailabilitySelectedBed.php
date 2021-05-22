@@ -38,7 +38,7 @@ if ($pagetype == "") {
 
 <body>
   <!-- nav bar contents -->
-  <header-component></header-component>
+  <!-- <header-component></header-component> -->
   <!-- nav bar contents -->
 
 
@@ -80,14 +80,14 @@ if ($pagetype == "") {
               <span class="jk-refresh-text cs-primary">Refresh</span></span> -->
             </h4>
 
-            <div class="alert alert-primary jk-alert-info" role="alert">
+            <!-- <div class="alert alert-primary jk-alert-info" role="alert">
               <span class="jk-info-icon"> <svg class="MuiSvgIcon-root-603" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill="none" d="M0 0h24v24H0z"></path>
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
                   </path>
                 </svg></span>
               Please call 1912 to get on the queue.
-            </div>
+            </div> -->
 
             <!-- card 2 patient waiting for doctors contents -->
             <div class="cs-white-cards jk-bed-table-padding" style="margin-top: 2%;">
@@ -129,12 +129,13 @@ if ($pagetype == "") {
                     <thead>
                       <tr>
                         <th>Hospital Name</th>
+                        <th>Zone</th>
                         <th>Available</th>
                         <th>Total</th>
                         <th>Occupied</th>
                         <th>Hospital Type</th>
                         <th>Contact</th>
-                        <th>Last updated
+                        <th>Last Updated
                         </th>
                       </tr>
                     </thead>
@@ -171,6 +172,9 @@ if ($pagetype == "") {
           data: 'name'
         },
         {
+          data: 'zone'
+        },
+        {
           data: 'vacant'
         },
         {
@@ -182,9 +186,17 @@ if ($pagetype == "") {
         {
           data: 'type'
         },
-        {
-          data: 'phone'
-        },
+       
+        { 
+         data: "phone",
+         "render": function(data, type, row, meta){
+            if(type === 'display'){
+                data = '<a href="tel:'+ data +'">' + data + '</a>'
+            }
+            return data;
+         }
+      }, 
+
         {
           data: 'updated_on'
         },

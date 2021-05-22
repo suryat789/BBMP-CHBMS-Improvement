@@ -43,17 +43,8 @@ $resultwithFilter = $stmt->get_result()->fetch_row()[0];
 $totalRecordwithFilter = $resultwithFilter;		
 $stmt->close();
 
-
-
-if($columnName=="")
-{
-  $columnName = "c2.name";
-
-}
-if($columnSortOrder=="")
-{
-$columnSortOrder = "asc";
-}
+$columnName = "c1.vacant";
+$columnSortOrder = "desc";
 
 if($row=="")
 {
@@ -65,7 +56,7 @@ $rowperpage = 10;
 }
 
 ## Fetch records
-$empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.updated_on,c2.name,c2.type,c2.phone from bed as c1,hospital
+$empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.updated_on,c2.name,c2.type,c2.phone,c2.zone from bed as c1,hospital
  as  c2 where c1.type = ?  and c1.hospital_id = c2.id ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
  	
  $stmt = $mysqli->prepare($empQuery);
@@ -82,7 +73,8 @@ $empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.updated_on,c2.name,c2.t
         $data[$key]['occupied'] = $val['occupied'];	
         $data[$key]['type'] = $val['type'];
         $data[$key]['phone'] = $val['phone'];	
-        $data[$key]['updated_on'] = date('d/m/Y h:i A', strtotime($val['updated_on']));		
+        $data[$key]['zone'] = $val['zone'];
+        $data[$key]['updated_on'] = date('d/m/Y h:i:s A', strtotime($val['updated_on']));		
 		 }
 		}
 

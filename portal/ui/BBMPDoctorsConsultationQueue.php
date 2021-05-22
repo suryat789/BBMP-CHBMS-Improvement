@@ -36,7 +36,7 @@ if ($pagetype == "") {
 
 <body>
   <!-- nav bar contents -->
-  <header-component></header-component>
+  <!-- <header-component></header-component> -->
   <!-- nav bar contents -->
 
 
@@ -69,8 +69,8 @@ if ($pagetype == "") {
           <div class="card-body">
             <h4 class="cs-card-title">
             
-            <?php echo $cat;?> Queue- <?php echo $pagetype ?>
-              <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?>
+            <?php echo $cat;?> Queue - <?php echo $pagetype ?>
+              <!-- <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php //echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?> -->
             </h4>
 
             <!-- card 2 patient waiting for doctors contents -->
@@ -82,10 +82,10 @@ if ($pagetype == "") {
                     <thead>
                       <tr>
 
-                        <th scope="col">Queue No.</th>
+                        <th scope="col">Queue Position</th>
                         <th scope="col">BU Number</th>
-                        <th scope="col">SRF Number.</th>
-                        <th scope="col">Added on</th>
+                        <!-- <th scope="col">SRF Number.</th> -->
+                        <th scope="col">Added On</th>
 
                       </tr>
                     </thead>
@@ -122,9 +122,9 @@ if ($pagetype == "") {
         {
           data: 'bucode'
         },
-        {
-          data: 'srf_number'
-        },
+        // {
+        //   data: 'srf_number'
+        // },
         {
           data: 'time_added_to_queue'
         },
@@ -132,4 +132,15 @@ if ($pagetype == "") {
       ]
     });
   });
+  $('empTable').dataTable( {
+  "ordering": false
+} );
+
+$('empTable').dataTable( {
+  "columns": [
+    { "width": "10%" },
+    null,    
+    null
+  ]
+} );
 </script>

@@ -46,7 +46,7 @@ const validateForm = () => {
 document.querySelectorAll('.jk-home-link').forEach(element => element.addEventListener('click', function (event) {
   // do something
   console.log(event);
-  window.location.href = "index.php#";
+  window.location.href = "index.php";
 }));
 document.querySelectorAll('.jk-zone-card').forEach(element => element.addEventListener('click', function (event) {
   // do something
@@ -78,17 +78,17 @@ document.querySelectorAll('.jk-refresh-text').forEach(element => element.addEven
 document.querySelectorAll('.jk-bed-availability').forEach(element => element.addEventListener('click', function (event) {
   // do something
   console.log(event);
-  window.location.href = "BBMPBedAvailablity.php#";
+  window.location.href = "BBMPBedAvailablity.php";
 }));
 document.querySelectorAll('.jk-bed-faq').forEach(element => element.addEventListener('click', function (event) {
   // do something
   console.log(event);
-  window.location.href = "FAQ.php#";
+  window.location.href = "FAQ.php";
 }));
 document.querySelectorAll('.jk-bed-contact').forEach(element => element.addEventListener('click', function (event) {
   // do something
   console.log(event);
-  window.location.href = "BBMPContact.php#";
+  window.location.href = "BBMPContact.php";
 }));
 
 document.querySelectorAll('.jk-bed-available').forEach(element => element.addEventListener('click', function (event) {
@@ -100,7 +100,7 @@ document.querySelectorAll('.jk-bed-available').forEach(element => element.addEve
 document.querySelectorAll('.jk-bed-contact').forEach(element => element.addEventListener('click', function (event) {
   // do something
   console.log(event);
-  window.location.href = "BBMPContact.php#";
+  window.location.href = "BBMPContact.php";
 }));
 
 

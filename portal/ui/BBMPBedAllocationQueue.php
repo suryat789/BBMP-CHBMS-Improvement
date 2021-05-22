@@ -36,7 +36,7 @@ if ($pagetype == "") {
 
 <body>
   <!-- nav bar contents -->
-  <header-component></header-component>
+  <!-- <header-component></header-component> -->
   <!-- nav bar contents -->
 
 

@@ -24,7 +24,7 @@
 
 <body>
     <!-- nav bar contents -->
-    <header-component></header-component>
+    <!-- <header-component></header-component> -->
     <!-- nav bar contents -->
 
     <div class="cs-card-body">

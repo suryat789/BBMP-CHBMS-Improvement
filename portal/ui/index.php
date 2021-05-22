@@ -26,7 +26,7 @@
 
 <body>
   <!-- nav bar contents -->
-  <header-component></header-component>
+  <!-- <header-component></header-component> -->
   <!-- nav bar contents -->
 
   <div class="cs-card-body">
@@ -51,7 +51,7 @@
       <!-- router contents -->
 
       <div class="card-body">
-        <h4 class="cs-card-title">Patient Queue Status <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?>
+        <!-- <h4 class="cs-card-title">Patient Queue Status <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php //echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?> -->
                   <!--<span class="jk-refresh-icon">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
                 <path d="M0 0h24v24H0V0z" fill="none" />
@@ -72,13 +72,13 @@
         <!-- card 1 search contents -->
         <div class="cs-white-cards">
           <div class="card-body">
-            <h6 class="card-title cs-card1-header  jk-font-bold">Check your Queue status </h6>
-            <h6 class="card-subtitle cs-card1-helper-text">Search by BU Number(eg BU-12355) along with the last 4 digit of the registered mobile number. Call 1912 incase you are not alloted a BU Number</h6>
+            <h6 class="card-title cs-card1-header  jk-font-bold">Check Queue Position </h6>
+            <h6 class="card-subtitle cs-card1-helper-text">Search by BU Number(e.g. BU12355) along with the last 4 digit of the registered mobile number.</h6>
             
             <form name="myForm" class="row g-3 needs-validation cs-card1-form jk-dashboard-form" novalidate>
               <div class="col-md-3 jk-no-padding-left">
                 <!-- <label for="validationCustom01" class="form-label">First name</label> -->
-                <input type="text" name="buNumber"  class="form-control" id="validationCustom01" placeholder="BU/TBU Number (eg BU-123456)" required>
+                <input type="text" name="buNumber"  class="form-control" id="validationCustom01" placeholder="BU/TBU Number (e.g. BU123456)" required>
                 
               </div>
               <div class="col-md-3 jk-no-padding-left">
@@ -101,15 +101,11 @@
               </div>
               <div>
                 • Enter your BU Number and the last 4 digits of your registered phone number to look up your
-                status in the queue.
+                position in the queue.
               </div>
               <div>
-                • If you are not on the queue yet and need medical assistance, please call 1912 to get your BU Number
-              </div>
-              <div>
-                • After calling 1912, you will be sent an SMS with your BU number in it. Please find your SRF Number in
-                the top right corner of your RT-PCR test report
-              </div>
+                • If you are not on the queue yet and need medical assistance, please call 1912.
+              </div>              
             </div>
             <!-- search result  -->
             <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-search-result" id="jk-search-result-element">
@@ -139,7 +135,7 @@
               </div>
               <div class="jk-search-response-holder">
                 <div class="jk-search-response-value" id="notfound">
-                No result found!               
+                You are currently not in any Queue. If you need medical assistance, call 1912.              
                 </div>                
               </div>
             </div>
@@ -164,11 +160,12 @@
                 <h3 data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-bold"><?php echo $dataVal1['total']; ?></h3>
                 <p>
                   <small>
-                  <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-color-grey" style="display:inline-block;">Next in Line</span>
+                  <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-font-color-grey" style="display:inline-block;">Next in Line</span><br/>
                     <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" style="display:inline-block;"><?php echo $dataVal1['bucode']; ?>
-                    <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-timeperiod-element">(
+                    <span data-zone_type="<?php echo $dataVal1['queue_name']; ?>" class="jk-timeperiod-element">
+                    <!-- (
                       <?php                      
-                        $currentdate =  strtotime(date('Y-m-d H:i:s'));
+                        /*$currentdate =  strtotime(date('Y-m-d H:i:s'));
                         $createdDate =   strtotime($dataVal1['time_added_to_queue']);
                         $difference  =  $currentdate - $createdDate;
                         $minutes =  floor($difference/(60));
@@ -181,8 +178,8 @@
                         echo $hours .' Hr';    
                         }else{
                             echo $days . ' Days';
-                        }
-                        ?> Ago)
+                        }*/
+                        ?> Ago) -->
                       </span>
                     </span>
                   </small>
@@ -192,7 +189,7 @@
           </div>
         </div>
         <?php }?>
-
+        <br/>                
         <!-- card 2 patient waiting for doctors contents -->
         <!-- card 3 patient waiting contents -->        
         <div class="alert alert-primary jk-alert-danger" role="alert">

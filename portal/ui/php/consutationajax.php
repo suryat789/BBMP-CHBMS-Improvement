@@ -45,17 +45,9 @@ $resultwithFilter = $stmt->get_result()->fetch_row()[0];
 $totalRecordwithFilter = $resultwithFilter;		
 $stmt->close();
 
-
-
-if($columnName=="")
-{
-  $columnName = "time_added_to_queue";
-
-}
-if($columnSortOrder=="")
-{
+$columnName = "time_added_to_queue";
 $columnSortOrder = "asc";
-}
+
 
 if($row=="")
 {
@@ -83,8 +75,8 @@ $rowperpage = 10;
 		 foreach($result as $key => $val){
 				$data[$key]['patient_id'] = $i;
 				$data[$key]['bucode'] = $val['bucode'];
-        $data[$key]['srf_number'] = $val['srf_number'];	
-        $data[$key]['time_added_to_queue'] = date('d/m/Y h:i A', strtotime($val['time_added_to_queue']));	
+        //$data[$key]['srf_number'] = $val['srf_number'];	
+        $data[$key]['time_added_to_queue'] = date('d/m/Y h:i:s A', strtotime($val['time_added_to_queue']));	
         $i++;
 		 }
 		}
