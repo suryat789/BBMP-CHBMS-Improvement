@@ -1,9 +1,9 @@
 const array = ['jagan', 'bacac'];
 const validateForm = () => {
   let valid = false;
-  let form = document.forms["myForm"]
+  let form = document.forms["myForm"];
   if (form["mobNumber"].value && form["buNumber"].value) {
-    if (form["mobNumber"].value.length == 4 && form["buNumber"].value.length >0) {
+    if (form["buNumber"].value.length >= 4 && form["mobNumber"].value.length > 0) {
       valid = true;
     }
   }
@@ -22,11 +22,11 @@ const validateForm = () => {
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
       form.addEventListener('submit', function (event) {
-        event.preventDefault()
-        event.stopPropagation()
+        event.preventDefault();
+        event.stopPropagation();
         if (!validateForm()) { //!form.checkValidity() 
           form.classList.add('was-validated')
-          mySubmitFunction(false)
+          mySubmitFunction(false);
         } else {
           form.classList.remove('was-validated');
           mySubmitFunction(true);
@@ -46,7 +46,7 @@ const validateForm = () => {
 document.querySelectorAll('.jk-home-link').forEach(element => element.addEventListener('click', function (event) {
   // do something
   console.log(event);
-  window.location.href = "index.php";
+  window.location.href = "index.php#";
 }));
 document.querySelectorAll('.jk-zone-card').forEach(element => element.addEventListener('click', function (event) {
   // do something
@@ -110,9 +110,9 @@ function mySubmitFunction(isValid = false) {
   var x = document.getElementById("jk-search-result-element");  
   var y = document.getElementById("jk-search-helper-text");
   var z = document.getElementById("notfound");
-  var buNo= document.getElementById("validationCustom01").value;
-  var mobileNo= document.getElementById("validationCustom03").value;
-  z.style.display ="none";
+  var buNo = document.getElementById("validationCustom01").value;
+  var mobileNo = document.getElementById("validationCustom03").value;
+  z.style.display = "none";
   
   if (isValid) {    
     $.ajax({
@@ -123,8 +123,7 @@ function mySubmitFunction(isValid = false) {
       dataType: 'json',      
       success: function(response){ 
         var obj = JSON.parse(JSON.stringify(response));
-         
-              console.log(obj);
+        console.log(obj);
              if(obj.id==null){   
                             
                 z.style.display = "block";
@@ -136,31 +135,25 @@ function mySubmitFunction(isValid = false) {
                 $('div.qZone').text('');
                 $('div.msg').text("");
             }else{
-              //if(obj.queue_type =='triage'){
-               // $('div.lbqType').text('Queue Type');
+              
                 $('div.qType').text("Patient is Waiting in "+obj.queue_type+' '+obj.queue_name); 
                             
                 $('div.lbqPosition').text('Queue Position');
                 $('div.qPosition').text(obj.queue_position);                
                 
                 //$('div.msg').text("The patient is yet to be consulted by Zonal doctor. Please wait for the doctor's call");
-              
-              
-            }             
-              //$('#degInstitute').val(response.institution_id);
-                                                                      
-      }
-  });
+                          
+            }                                                                      
+        }
+    });
     x.style.display = "block";
     y.style.display = "none";
     //z.style.display = "none";
-
-  } else {
-    
-    x.style.display = "none";
-    y.style.display = "block";
-    //z.style.display = "block";
-  }
+    } else {      
+      x.style.display = "none";
+      y.style.display = "block";
+      //z.style.display = "block";
+    }
 }
 
 

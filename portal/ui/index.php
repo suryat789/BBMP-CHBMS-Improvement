@@ -1,15 +1,13 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-  <?php
-
+<?php
   include('php/connection.php');
   include('php/query.php');
   include('php/pat.php');
   include('php/patientwb.php');
   $curDate = date('Y-m-d H:i:s');
   ?>
+<head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +18,10 @@
   <meta name="description" content="Dashboard to show details of Bed Allocation">
   <meta name="author" content="Jagan">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700 & display=swap" />
+  
   <script src="js/header.js" type="text/javascript" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -74,6 +74,7 @@
           <div class="card-body">
             <h6 class="card-title cs-card1-header  jk-font-bold">Check your Queue status </h6>
             <h6 class="card-subtitle cs-card1-helper-text">Search by BU Number(eg BU-12355) along with the last 4 digit of the registered mobile number. Call 1912 incase you are not alloted a BU Number</h6>
+            
             <form name="myForm" class="row g-3 needs-validation cs-card1-form jk-dashboard-form" novalidate>
               <div class="col-md-3 jk-no-padding-left">
                 <!-- <label for="validationCustom01" class="form-label">First name</label> -->
@@ -193,8 +194,7 @@
         <?php }?>
 
         <!-- card 2 patient waiting for doctors contents -->
-        <!-- card 3 patient waiting contents -->
-        
+        <!-- card 3 patient waiting contents -->        
         <div class="alert alert-primary jk-alert-danger" role="alert">
           <span class="jk-info-icon"> <svg class="MuiSvgIcon-root-603" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="none" d="M0 0h24v24H0z"></path>
@@ -212,12 +212,9 @@
     </div>
   </div>
   <!-- Scripts contents -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
-  </script>
- 
-
+  </script>  
   <script src="js/scripts.js"></script>
 
   <!-- Scripts contents -->

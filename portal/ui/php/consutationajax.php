@@ -68,17 +68,18 @@ $rowperpage = 10;
 
 ## Fetch records
 
- $empQuery = "select  bucode, srf_number,patient_id,time_added_to_queue from patient where queue_name= ? ".$searchQuery ." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+ $empQuery = "select  bucode, srf_number,patient_id,time_added_to_queue from patient where queue_name = ? ".$searchQuery ." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
  	
  $stmt = $mysqli->prepare($empQuery);
   $stmt->bind_param("s", $pagetype);		
 		$stmt->execute();	
 
 		$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);	
-    $data = array();	
+    $data = array();    
+      $i = $row + 1; 
     
 		if($stmt->affected_rows>0) {
-      $i =1;
+     
 		 foreach($result as $key => $val){
 				$data[$key]['patient_id'] = $i;
 				$data[$key]['bucode'] = $val['bucode'];
