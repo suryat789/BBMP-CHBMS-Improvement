@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -26,6 +27,7 @@ public class Patients   {
   @JsonProperty("srfNumber")
   private String srfNumber = null;
 
+  @NotNull
   @JsonProperty("bucode")
   private String bucode = null;
 

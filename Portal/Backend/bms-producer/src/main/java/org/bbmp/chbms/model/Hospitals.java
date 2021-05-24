@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * Hospitals
@@ -23,6 +24,7 @@ public class Hospitals   {
   @JsonProperty("hospitalName")
   private String hospitalName = null;
 
+  @NotNull
   @JsonProperty("hospitalId")
   private String hospitalId = null;
 
