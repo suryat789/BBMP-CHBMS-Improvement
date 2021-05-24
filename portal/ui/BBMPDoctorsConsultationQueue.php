@@ -126,26 +126,15 @@ if ($pagetype == "") {
         {
           data: 'bucode'
         },
-        // {
-        //   data: 'srf_number'
-        // },
         {
           data: 'time_added_to_queue'
         },
-
-      ]
+      ],
+      'columnDefs': [ {
+        'targets': [0, 1, 2], // column index (start from 0)
+        'orderable': false, // set orderable false for selected columns
+     }]
     });
   });
-  $('empTable').dataTable({
-    "ordering": false
-  });
-
-  $('empTable').dataTable({
-    "columns": [{
-        "width": "10%"
-      },
-      null,
-      null
-    ]
-  });
+  
 </script>

@@ -43,7 +43,7 @@ if ($pagetype == "") {
   <div class="cs-card-body">
 
     <div class="card ">
-      <!-- Commit Test -->
+	<!-- Commit Test -->
       <!-- router contents -->
       <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs text-center">
@@ -79,16 +79,18 @@ if ($pagetype == "") {
           <div class="container-fluid">
             <div class="table-responsive">
 
-              <table id='empTable' class="table table-striped table-bordered nowrap" style="width:100%">
-                <thead>
-                  <tr>
-                    <th scope="col">Queue No.</th>
-                    <th scope="col">BU Number</th>
-                    <th scope="col">SRF Number.</th>
-                    <th scope="col">Added on</th>
-                  </tr>
-                </thead>
-              </table>
+                  <table id='empTable' class="table table-striped table-bordered nowrap" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th scope="col">Queue No.</th>
+                        <th scope="col">BU Number</th>
+                        <th scope="col">SRF Number.</th>
+                        <th scope="col">Added on</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -189,12 +189,12 @@ if ($pagetype == "") {
         {
           data: 'type'
         },
-
-        {
-          data: "phone",
-          "render": function(data, type, row, meta) {
-            if (type === 'display') {
-              data = '<a href="tel:' + data + '">' + data + '</a>'
+       
+        { 
+         data: "phone",
+         "render": function(data, type, row, meta){
+            if(type === 'display'){
+                data = '<a href="tel:'+ data +'">' + data + '</a>'
             }
             return data;
           }
@@ -203,7 +203,12 @@ if ($pagetype == "") {
         {
           data: 'updated_on'
         },
-      ]
+      ],
+      'columnDefs': [ {
+        'targets': [0, 1, 2, 3, 4, 5, 6, 7], // column index (start from 0)
+        'orderable': false, // set orderable false for selected columns
+     }]
+
     });
 
     new $.fn.dataTable.FixedHeader(table);
