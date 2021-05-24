@@ -109,27 +109,33 @@
             </div>
             <!-- search result  -->
             <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-search-result" id="jk-search-result-element">
-              <div class="jk-search-response-holder">
-                <!-- <div class="jk-search-response-label lbqType">                 
-                </div> -->
-                <div class="qType">                  
+                <div class="jk-search-response-holder">
+                  <div class="qType">                  
+                  </div>
                 </div>
-              </div>
-              <div class="jk-search-response-holder">
-                <div class="jk-search-response-label lbqPosition"></div>
-                <div class="jk-search-response-value jk-font-bold qPosition"></div>
-              </div>
-              <div class="jk-search-response-holder">
-                <div class="jk-search-response-label lbqZone"></div>
-                <div class="jk-search-response-value qZone"></div>
-              </div>
-              <div class="jk-search-response-holder">
-                <div class="jk-search-response-value msg"></div>
-              </div>
-              <div class="jk-search-response-holder">
-                <div class="jk-search-response-value" id="notfound">You are currently not in any Queue. If you need medical assistance, call 1912.
-                </div>                
-              </div>
+                <div class="jk-search-response-holder">
+                  <div class="jk-search-response-label lbqPosition"></div>
+                  <div class="jk-search-response-value jk-font-bold qPosition"></div>
+                </div>
+                <div class="jk-search-response-holder">
+                  <div class="jk-search-response-label lbqZone"></div>
+                  <div class="jk-search-response-value qZone"></div>
+                </div>
+                <div class="jk-search-response-holder">
+                  <div class="jk-search-response-value msg"></div>
+                </div>
+                <div class="jk-search-response-holder">
+                  <div class="jk-search-response-value" id="notfound">You are currently not in any Queue. If you need medical assistance, call 1912.
+                  </div>                
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-search-result" id="jk-search-result-error">
+                <div class="jk-search-response-holder">
+                  <div class="jk-search-response-value">
+                  Please enter minimum 4 digit of BU/TBU No. and last 1 digit of mobile no.
+                  </div>                
+                </div>
             </div>
             <!-- search result  -->
           </div>

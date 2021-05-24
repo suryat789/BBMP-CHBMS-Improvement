@@ -5,6 +5,8 @@ const validateForm = () => {
   if (form["mobNumber"].value && form["buNumber"].value) {
     if (form["buNumber"].value.length >= 4 && form["mobNumber"].value.length > 0) {
       valid = true;
+    }else{
+      valid = false;
     }
   }
 
@@ -107,13 +109,15 @@ document.querySelectorAll('.jk-bed-contact').forEach(element => element.addEvent
 document.getElementById("cs-doctor-consultation")
 
 function mySubmitFunction(isValid = false) {
+  var errorTxt = document.getElementById("jk-search-result-error");
   var x = document.getElementById("jk-search-result-element");  
   var y = document.getElementById("jk-search-helper-text");
   var z = document.getElementById("notfound");
   var buNo = document.getElementById("validationCustom01").value;
   var mobileNo = document.getElementById("validationCustom03").value;
   z.style.display = "none";
-  
+  errorTxt.style.display = "none";
+  $('div.msg').text("");
   if (isValid) {    
     $.ajax({
       type: 'POST',
@@ -148,10 +152,13 @@ function mySubmitFunction(isValid = false) {
     x.style.display = "block";
     y.style.display = "none";
     //z.style.display = "none";
-    } else {      
+    } else {
+
       x.style.display = "none";
       y.style.display = "block";
-      //z.style.display = "block";
+      z.style.display = "none";
+      errorTxt.style.display = "block";     
+
     }
 }
 
