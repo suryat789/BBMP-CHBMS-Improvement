@@ -264,11 +264,18 @@ h6 {
     margin: 0px;
 }
 
-.jk-btn-back {
-    color: black;
-    margin: 5px 0px 0px 0px;
-    text-decoration: none;
-    cursor: pointer;
+.jk-btn-back{
+    margin-top:5px;
+    width: 4.6em;
+    height: 2.3em;
+    display: flex;
+    border: 1px solid rgba(0, 0, 255, 1);
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: medium;
+    color: rgba(0, 0, 255, 1);
+    cursor:pointer;
 }
 
 

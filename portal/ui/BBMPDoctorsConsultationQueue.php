@@ -31,7 +31,7 @@ if ($pagetype == "") {
 
   <!-- Datatable JS -->
   <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
- 
+
 </head>
 
 <body>
@@ -64,39 +64,43 @@ if ($pagetype == "") {
       <!-- router contents -->
 
 
-      <a class="btn-group jk-btn-back jk-home-link" role="group" aria-label="...">
-        <- Back </a>
-          <div class="card-body">
-            <h4 class="cs-card-title">
-            
-            <?php echo $cat;?> Queue - <?php echo $pagetype ?>
-              <!-- <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php //echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);?> -->
-            </h4>
+      <button class="btn-group jk-btn-back jk-home-link" role="group">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 7H3.83L9.42 1.41L8 0L0 8L8 16L9.41 14.59L3.83 9H16V7Z" fill="#0000FF" />
+        </svg>Back
+      </button>
+      <div class="card-body">
+        <h4 class="cs-card-title">
 
-            <!-- card 2 patient waiting for doctors contents -->
-            <div class="cs-white-cards" style="margin-top: 2%;">
-              <div class="container-fluid">
-                <div class="table-responsive">
+          <?php echo $cat; ?> Queue - <?php echo $pagetype ?>
+          <!-- <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php //echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']);
+                                                                                                      ?> -->
+        </h4>
 
-                  <table id='empTable' class="table table-striped table-bordered nowrap" style="width:100%">
-                    <thead>
-                      <tr>
+        <!-- card 2 patient waiting for doctors contents -->
+        <div class="cs-white-cards" style="margin-top: 2%;">
+          <div class="container-fluid">
+            <div class="table-responsive">
 
-                        <th scope="col">Queue Position</th>
-                        <th scope="col">BU Number</th>
-                        <!-- <th scope="col">SRF Number.</th> -->
-                        <th scope="col">Added On</th>
+              <table id='empTable' class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                  <tr>
 
-                      </tr>
-                    </thead>
+                    <th scope="col">Queue Position</th>
+                    <th scope="col">BU Number</th>
+                    <!-- <th scope="col">SRF Number.</th> -->
+                    <th scope="col">Added On</th>
 
-                  </table>
-                </div>
-              </div>
+                  </tr>
+                </thead>
+
+              </table>
             </div>
-            <!-- card 2 patient waiting for doctors contents -->
-            <button onclick="topFunction()" id="myBtn" title="Go to top" style="display: none;">Top</button>
           </div>
+        </div>
+        <!-- card 2 patient waiting for doctors contents -->
+        <button onclick="topFunction()" id="myBtn" title="Go to top" style="display: none;">Top</button>
+      </div>
     </div>
   </div>
   <!-- Scripts contents -->
@@ -132,15 +136,16 @@ if ($pagetype == "") {
       ]
     });
   });
-  $('empTable').dataTable( {
-  "ordering": false
-} );
+  $('empTable').dataTable({
+    "ordering": false
+  });
 
-$('empTable').dataTable( {
-  "columns": [
-    { "width": "10%" },
-    null,    
-    null
-  ]
-} );
+  $('empTable').dataTable({
+    "columns": [{
+        "width": "10%"
+      },
+      null,
+      null
+    ]
+  });
 </script>
