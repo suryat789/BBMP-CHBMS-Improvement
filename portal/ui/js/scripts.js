@@ -123,7 +123,7 @@ function mySubmitFunction(isValid = false) {
       dataType: 'json',      
       success: function(response){ 
         var obj = JSON.parse(JSON.stringify(response));
-        console.log(obj);
+        //console.log(obj);
              if(obj.id==null){   
                             
                 z.style.display = "block";
@@ -136,8 +136,7 @@ function mySubmitFunction(isValid = false) {
                 $('div.msg').text("");
             }else{
               
-                $('div.qType').text("Patient is Waiting in "+obj.queue_type+' '+obj.queue_name); 
-                            
+                $('div.qType').text("Patient is Waiting in "+obj.queue_type+' '+obj.queue_name);
                 $('div.lbqPosition').text('Queue Position');
                 $('div.qPosition').text(obj.queue_position);                
                 

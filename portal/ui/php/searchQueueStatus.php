@@ -14,13 +14,13 @@
                       
             while($row = $result->fetch_assoc()) 
             {
-                $data['id'] = $row["id"];
-                $data['bucode'] = $row["bucode"];                
-                $data['srfnumber'] = $row["srf_number"];
-                $data['queue_type'] = $row["queue_type"];
-                $data['queue_position'] = $row["queue_position"]+1; 
-                $data['queue_name'] = $row["queue_name"];
-                $data['zone'] = $row["zone"];                        
+                $data['id'] = trim($row["id"]);
+                $data['bucode'] = trim($row["bucode"]);                
+                $data['srfnumber'] = trim($row["srf_number"]);
+                $data['queue_type'] = trim($row["queue_type"]);
+                $data['queue_position'] = trim($row["queue_position"])+1; 
+                $data['queue_name'] = trim($row["queue_name"]);
+                $data['zone'] = trim($row["zone"]);                        
             }
         }
     } 

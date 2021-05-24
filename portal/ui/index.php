@@ -76,12 +76,12 @@
             <h6 class="card-subtitle cs-card1-helper-text">Search by BU Number(e.g. BU12355) along with the last 4 digit of the registered mobile number.</h6>
             
             <form name="myForm" class="row g-3 needs-validation cs-card1-form jk-dashboard-form" novalidate>
-              <div class="col-md-3 jk-no-padding-left">
+              <div class="col-md-4 jk-no-padding-left">
                 <!-- <label for="validationCustom01" class="form-label">First name</label> -->
                 <input type="text" name="buNumber"  class="form-control" id="validationCustom01" placeholder="BU/TBU Number (e.g. BU123456)" required>
                 
               </div>
-              <div class="col-md-3 jk-no-padding-left">
+              <div class="col-md-4 jk-no-padding-left">
                 <!-- <label for="validationCustom02" class="form-label">Last name</label> -->
                 <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
                 <input type="text" name="mobNumber" class="form-control" id="validationCustom03" placeholder="Last 4 digit of registered Mobile Number" required>
@@ -112,30 +112,22 @@
               <div class="jk-search-response-holder">
                 <!-- <div class="jk-search-response-label lbqType">                 
                 </div> -->
-                <div class="qType">
-                  
+                <div class="qType">                  
                 </div>
               </div>
               <div class="jk-search-response-holder">
-                <div class="jk-search-response-label lbqPosition">
-                </div>
-                <div class="jk-search-response-value jk-font-bold qPosition">
-                </div>
+                <div class="jk-search-response-label lbqPosition"></div>
+                <div class="jk-search-response-value jk-font-bold qPosition"></div>
               </div>
               <div class="jk-search-response-holder">
-                <div class="jk-search-response-label lbqZone">
-                </div>
-                <div class="jk-search-response-value qZone">
-
-                </div>
+                <div class="jk-search-response-label lbqZone"></div>
+                <div class="jk-search-response-value qZone"></div>
               </div>
               <div class="jk-search-response-holder">
-                <div class="jk-search-response-value msg">
-                </div>
+                <div class="jk-search-response-value msg"></div>
               </div>
               <div class="jk-search-response-holder">
-                <div class="jk-search-response-value" id="notfound">
-                You are currently not in any Queue. If you need medical assistance, call 1912.              
+                <div class="jk-search-response-value" id="notfound">You are currently not in any Queue. If you need medical assistance, call 1912.
                 </div>                
               </div>
             </div>

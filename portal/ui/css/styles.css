@@ -301,7 +301,7 @@ h6 {
 }
 
 .jk-search-response-label {
-    margin-left: 2%;
+    margin-left: 0%;
     width: 30%;
     text-align: left;
     line-height: 2em;
@@ -317,7 +317,7 @@ h6 {
 }
 
 .jk-search-result {
-    width: 80%;
+    width: 91%;
 }
 
 /* 
