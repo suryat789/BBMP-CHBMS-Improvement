@@ -213,8 +213,8 @@ public class PatientService {
                 .bucode(String.valueOf(patient.getBuNumber()))
                 .srfNumber(patient.getSrfNumber())
                 .phoneLastFour(phoneLastFour)
-                .queueType((queueEntry != null) ? queueEntry.getType() : null)
-                .queueName((queueEntry != null) ? queueEntry.getType() : null)
+                .queueType(getQueueType(queueEntry))
+                .queueName(getQueueName(queueEntry))
                 .zone(patient.getZone())
                 .timeAddedToQueue((queueEntry != null) ? queueEntry.getEnqueueTimestamp().toInstant().toString() : null)
                 .build()
@@ -235,5 +235,31 @@ public class PatientService {
                 .zone(patient.getZone())
                 .build()
         );
+    }
+
+    private String getQueueType(QueueEntry queueEntry) {
+        if (queueEntry == null) return null;
+        if (QueueType.PENDING_TRIAGING.getName().equals(queueEntry.getType())) {
+            return "TRIAGING";
+        }
+
+        if (queueEntry.getType().startsWith("ER_")) {
+            return "EMERGENCY BED";
+        }
+
+        return "BED";
+    }
+
+    private String getQueueName(QueueEntry queueEntry) {
+        if (queueEntry == null) return null;
+        if (QueueType.PENDING_TRIAGING.getName().equals(queueEntry.getType())) {
+            return queueEntry.getZone();
+        }
+
+        if (queueEntry.getType().startsWith("ER_")) {
+            return queueEntry.getType().replace("ER_", "EMERGENCY ");
+        }
+
+        return queueEntry.getType();
     }
 }

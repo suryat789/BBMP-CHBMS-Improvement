@@ -48,7 +48,7 @@ public class PBIntegrator {
             }
             int code = response.code();
             if (code != 200 && code != 201) {
-                log.error("Error while putting patient in public dashboard {}", response.body());
+                log.error("Error while putting patient in public dashboard code{}, body{}", code, response.body());
                 throw new RuntimeException("Error while putting patient in public dashboard");
             }
             return null;
@@ -92,7 +92,7 @@ public class PBIntegrator {
                                                             String requestBody) {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, requestBody);
-        System.out.println(requestBody);
+        log.info(requestBody);
         return new com.squareup.okhttp.Request.Builder()
                 .url(url)
                 .addHeader("content-type", "application/json")
