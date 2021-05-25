@@ -1,5 +1,6 @@
 package com.chbms.queuemgmt.schedule;
 
+import com.chbms.queuemgmt.config.CronConfig;
 import com.chbms.queuemgmt.data.entity.QueueEntry;
 import com.chbms.queuemgmt.dto.allotment.HospitalDetailsVO;
 import com.chbms.queuemgmt.dto.allotment.SASTResponseDto;
@@ -36,6 +37,9 @@ public class AllotmentScheduler {
 
     @Autowired
     IQueueService queueService;
+
+    @Autowired
+    CronConfig cronConfig;
 
     private static final Gson gson = new Gson();
 
@@ -138,6 +142,11 @@ public class AllotmentScheduler {
         List<HospitalDetailsVO> hospitals = realtimeBedAvailability.getHospitalDetails();
 
         log.info("Hospitals found {}", hospitals.size());
+
+        if (cronConfig.getStopAutoAllocation()) {
+            log.info("Auto allocation is stopped through config");
+            return;
+        }
 
         Map<String, List<HospitalDetailsVO>> hospitalsGroupedByZone = hospitals.stream()
                 .filter(hospital -> StringUtils.isNotBlank(hospital.getZone()))
