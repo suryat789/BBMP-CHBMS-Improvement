@@ -56,7 +56,7 @@ $rowperpage = 10;
 }
 
 ## Fetch records
-$empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.updated_on,c2.name,c2.type,c2.phone,c2.zone from bed as c1,hospital
+$empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.blocked,c1.updated_on,c2.name,c2.type,c2.phone,c2.zone from bed as c1,hospital
  as  c2 where c1.type = ?  and c1.hospital_id = c2.id ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
  	
  $stmt = $mysqli->prepare($empQuery);
@@ -70,7 +70,7 @@ $empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.updated_on,c2.name,c2.t
 				$data[$key]['name'] = $val['name'];
 				$data[$key]['vacant'] = $val['vacant'];
         $data[$key]['capacity'] = $val['capacity'];	
-        $data[$key]['occupied'] = $val['occupied'];	
+        $data[$key]['occupied'] = $val['occupied'] + $val['blocked'];	
         $data[$key]['type'] = $val['type'];
         $data[$key]['phone'] = $val['phone'];	
         $data[$key]['zone'] = $val['zone'];
