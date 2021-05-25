@@ -1,9 +1,9 @@
 package com.chbms.queuemgmt.service.queue;
 
-import com.chbms.queuemgmt.enums.QueueType;
 import com.chbms.queuemgmt.data.entity.QueueEntry;
 import com.chbms.queuemgmt.data.repository.QueueRepository;
 import com.chbms.queuemgmt.dto.patient.QueueStatusVO;
+import com.chbms.queuemgmt.enums.QueueType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +27,7 @@ public class QueueServiceImpl implements IQueueService {
 
     /**
      * Gets the rank of the patients in the queue. First the pushed front patients are considered are considered for ranking. Ranking based on their enqueue time
+     *
      * @param queueEntry
      * @return
      */
@@ -35,7 +36,7 @@ public class QueueServiceImpl implements IQueueService {
         /**
          * Check only in push front queues
          */
-        if(queueEntry.getPushFront() == -1) {
+        if (queueEntry.getPushFront() == -1) {
             return queueRepository.findRankByQueueTypePushed(queueEntry.getPatientId(), queueEntry.getType()) + 1;
         } else {
             Long frontPushedPatients = queueRepository.findPushedCountByQueueType(queueEntry.getType());
