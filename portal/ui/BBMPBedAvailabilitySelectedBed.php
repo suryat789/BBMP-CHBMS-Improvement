@@ -1,4 +1,5 @@
 <?php
+include('php/connection.php');
 $pagetype = $_GET['type'];
 
 
@@ -6,6 +7,13 @@ if ($pagetype == "") {
   $pagetype = "General";
 }
 
+?>
+<?php
+  # Start Caching for 120 seconds
+    Header("Cache-Control: must-revalidate");    
+    $ExpStr = "Expires: " . date("d/m/Y h:i:s a", strtotime("+120 seconds"));
+    Header($ExpStr);
+    #end
 ?>
 <!doctype html>
 <html lang="en">

@@ -2,6 +2,13 @@
 <html lang="en">
 <?php include('php/queue.php'); ?>
 <?php
+  # Start Caching for 120 seconds
+    Header("Cache-Control: must-revalidate");    
+    $ExpStr = "Expires: " . date("d/m/Y h:i:s a", strtotime("+120 seconds"));
+    Header($ExpStr);
+    #end
+?>
+<?php
 $pagetype = urldecode($_GET['type']);
 $cat = $_GET['category'];
 if ($pagetype == "") {
@@ -136,5 +143,8 @@ if ($pagetype == "") {
      }]
     });
   });
+  $('empTable').DataTable({
+    "ordering": false
+});
   
 </script>

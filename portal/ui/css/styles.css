@@ -842,4 +842,8 @@ table.dataTable thead td {
     border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.dataTables_filter, .dataTables_info, .dataTables_length { display: none; }
+.dataTables_filter,
+.dataTables_info,
+.dataTables_length {
+    display: none;
+}

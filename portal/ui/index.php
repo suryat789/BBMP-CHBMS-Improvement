@@ -7,6 +7,13 @@
   include('php/patientwb.php');
   $curDate = date('Y-m-d H:i:s');
   ?>
+  <?php
+  # Start Caching for 120 seconds
+    Header("Cache-Control: must-revalidate");    
+    $ExpStr = "Expires: " . date("d/m/Y h:i:s a", strtotime("+120 seconds"));
+    Header($ExpStr);
+    #end
+?>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -58,8 +65,8 @@
                 <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
               </svg>
             </span>
-         <span class="jk-refresh-text cs-primary">Refresh</span>-->
-        </h4>
+         <span class="jk-refresh-text cs-primary">Refresh</span>
+        </h4>-->
         <!--<div class="alert alert-primary jk-alert-danger" role="alert">
           <span class="jk-info-icon"> <svg class="MuiSvgIcon-root-603" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="none" d="M0 0h24v24H0z"></path>
