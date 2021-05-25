@@ -36,7 +36,7 @@ if (!$redis->get($key)) {
 
 	$source = 'Mysql Server';
 	
-    $sql="select sum( occupied ) as total_occupied,sum( blocked ) as total_blocked  , sum( vacant ) as total_vacant, sum( capacity ) as total_capacity ,type as bedtype from bed  GROUP BY type";
+ $sql="select sum( occupied ) as total_occupied,sum( blocked ) as total_blocked  , sum( vacant ) as total_vacant, sum( capacity ) as total_capacity ,type as bedtype from bed Where occupied IS NOT NULL AND blocked IS NOT NULL AND vacant IS NOT NULL GROUP BY bedtype";
 	
 	if ($result = $mysqli->query($sql)) {
 		if ($result->num_rows > 0) {
