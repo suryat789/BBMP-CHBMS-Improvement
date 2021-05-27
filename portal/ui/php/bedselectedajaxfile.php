@@ -1,5 +1,7 @@
 <?php 
 include('connection.php');
+include('redis_connection.php');
+
 $pagetype = $_GET['bedtypepage'];
 ## Read value
 if($pagetype=="")
@@ -56,29 +58,37 @@ $rowperpage = 10;
 }
 
 ## Fetch records
-$empQuery = "select c1.capacity,c1.occupied,c1.vacant,c1.blocked,c1.updated_on,c2.name,c2.type,c2.phone,c2.zone from bed as c1,hospital
+$empQuery1 = "select c1.capacity,c1.occupied,c1.vacant,c1.blocked,c1.updated_on,c2.name,c2.type,c2.phone,c2.zone from bed as c1,hospital
  as  c2 where c1.type = ?  and c1.hospital_id = c2.id ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
- 	
- $stmt = $mysqli->prepare($empQuery);
-  $stmt->bind_param("s", $pagetype);		
-		$stmt->execute();
-		$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);	
-    	
-		if($stmt->affected_rows>0) {
-			$data = array();	
-		 foreach($result as $key => $val){
-				$data[$key]['name'] = $val['name'];
-				$data[$key]['vacant'] = $val['vacant'];
-        $data[$key]['capacity'] = $val['capacity'];	
-        $data[$key]['occupied'] = $val['occupied'] + $val['blocked'];	
-        $data[$key]['type'] = $val['type'];
-        $data[$key]['phone'] = $val['phone'];	
-        $data[$key]['zone'] = $val['zone'];
-        $data[$key]['updated_on'] = date('d/m/Y h:i:s A', strtotime($val['updated_on']));		
-		 }
-		}
+ $data = array();	
+ if (!$redis->get($empQuery1)) {	
+   // echo $source = 'MySQL Server';
+    $stmt = $mysqli->prepare($empQuery1);
+    $stmt->bind_param("s", $pagetype);		
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);          
+    if($stmt->affected_rows>0) {
+         
+          foreach($result as $key => $val){
+            $data[$key]['name'] = $val['name'];
+            $data[$key]['vacant'] = $val['vacant'];
+            $data[$key]['capacity'] = $val['capacity'];	
+            $data[$key]['occupied'] = $val['occupied'] + $val['blocked'];	
+            $data[$key]['type'] = $val['type'];
+            $data[$key]['phone'] = $val['phone'];	
+            $data[$key]['zone'] = $val['zone'];
+            $data[$key]['updated_on'] = date('d/m/Y h:i:s A', strtotime($val['updated_on']));		
+        }
+        $redis->set($empQuery1, serialize($data));
+		    $redis->expire($empQuery1, $timeout); // time 10 secand
+    }
 
-		$stmt->close();
+    $stmt->close();
+ }else{
+  //echo $source = 'Redis Server';
+	$data = unserialize($redis->get($empQuery1));
+
+ }  
 
 
 ## Response

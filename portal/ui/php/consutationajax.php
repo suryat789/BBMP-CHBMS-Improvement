@@ -1,5 +1,6 @@
 <?php 
 include('connection.php');
+include('redis_connection.php');
 $pagetype = urldecode($_GET['patientpage']);
 ## Read value
 if($pagetype=="")
@@ -59,29 +60,39 @@ $rowperpage = 10;
 }
 
 ## Fetch records
-
+$data = array();   
  $empQuery = "select  bucode, srf_number,patient_id,time_added_to_queue from patient where queue_name = ? ".$searchQuery ." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
- 	
- $stmt = $mysqli->prepare($empQuery);
-  $stmt->bind_param("s", $pagetype);		
-		$stmt->execute();	
+ /*********Start Searching in Redis**********************/
+ 
+ if (!$redis->get($empQuery)) {
+      $source = 'MySQL Server';
+      $stmt = $mysqli->prepare($empQuery);
+      $stmt->bind_param("s", $pagetype);		
+        $stmt->execute();	
 
-		$result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);	
-    $data = array();    
-      $i = $row + 1; 
-    
-		if($stmt->affected_rows>0) {
-     
-		 foreach($result as $key => $val){
-				$data[$key]['patient_id'] = $i;
-				$data[$key]['bucode'] = $val['bucode'];
-        //$data[$key]['srf_number'] = $val['srf_number'];	
-        $data[$key]['time_added_to_queue'] = date('d/m/Y h:i:s A', strtotime($val['time_added_to_queue']));	
-        $i++;
-		 }
-		}
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);	
+         
+          $i = $row + 1; 
+        
+        if($stmt->affected_rows>0) {
+        
+          foreach($result as $key => $val){
+              $data[$key]['patient_id'] = $i;
+              $data[$key]['bucode'] = $val['bucode'];
+              //$data[$key]['srf_number'] = $val['srf_number'];	
+              $data[$key]['time_added_to_queue'] = date('d/m/Y h:i:s A', strtotime($val['time_added_to_queue']));	
+              $i++;
+          }
+          $redis->set($empQuery, serialize($data));
+		      $redis->expire($empQuery, $timeout); // time 10 secand
 
-		$stmt->close();
+        }
+
+        $stmt->close();
+  }else{
+    $source = 'Redis Server';
+	  $data = unserialize($redis->get($empQuery));
+  }    
    
     
 ## Response

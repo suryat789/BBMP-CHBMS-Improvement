@@ -5,13 +5,14 @@
   include('php/query.php');
   include('php/pat.php');
   include('php/patientwb.php');
+  
   $curDate = date('Y-m-d H:i:s');
   ?>
   <?php
   # Start Caching for 120 seconds
     Header("Cache-Control: must-revalidate");    
-    $ExpStr = "Expires: " . date("d/m/Y h:i:s a", strtotime("+120 seconds"));
-    Header($ExpStr);
+   $ExpStr = "Expires: " . date("d/m/Y h:i:s a", strtotime("+120 seconds"));
+   Header($ExpStr);
     #end
 ?>
 <head>
