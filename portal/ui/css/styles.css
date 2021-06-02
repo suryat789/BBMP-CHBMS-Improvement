@@ -550,7 +550,10 @@ h6 {
     display: flex;
     flex-flow: nowrap;
 }
-
+.card-header-tabs .nav-item{
+    display: flex;
+    align-items: center;
+}
 
 
 #myBtn {
