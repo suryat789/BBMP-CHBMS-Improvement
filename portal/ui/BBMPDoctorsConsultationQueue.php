@@ -95,7 +95,7 @@ if ($pagetype == "") {
 
                     <th scope="col">Queue Position</th>
                     <th scope="col">BU Number</th>
-                    <!-- <th scope="col">SRF Number.</th> -->
+                    <th scope="col">SRF Number</th>
                     <th scope="col">Added On</th>
 
                   </tr>
@@ -132,6 +132,9 @@ if ($pagetype == "") {
         },
         {
           data: 'bucode'
+        },
+        {
+          data: 'srf_number'
         },
         {
           data: 'time_added_to_queue'

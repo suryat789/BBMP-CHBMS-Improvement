@@ -80,12 +80,12 @@
         <div class="cs-white-cards">
           <div class="card-body">
             <h6 class="card-title cs-card1-header  jk-font-bold">Check Queue Position </h6>
-            <h6 class="card-subtitle cs-card1-helper-text">Search by BU Number(e.g. BU12355) along with the last 4 digit of the registered mobile number.</h6>
+            <h6 class="card-subtitle cs-card1-helper-text">Search by BU/SRF Number along with the last 4 digit of the registered mobile number.</h6>
             
             <form name="myForm" class="row g-3 needs-validation cs-card1-form jk-dashboard-form" novalidate>
               <div class="col-md-4 jk-no-padding-left">
                 <!-- <label for="validationCustom01" class="form-label">First name</label> -->
-                <input type="text" name="buNumber"  class="form-control" id="validationCustom01" placeholder="BU/TBU Number (e.g. BU123456)" required>
+                <input type="text" name="buNumber"  class="form-control" id="validationCustom01" placeholder="BU/SRF Number" required>
                 
               </div>
               <div class="col-md-4 jk-no-padding-left">
@@ -107,7 +107,7 @@
                 • This is only for patients who require hospitalization.
               </div>
               <div>
-                • Enter your BU Number and the last 4 digits of your registered phone number to look up your
+                • Enter your BU/SRF Number and the last 4 digits of your registered phone number to look up your
                 position in the queue.
               </div>
               <div>
