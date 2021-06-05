@@ -44,9 +44,9 @@
           <li class="nav-item ">
             <a class="nav-link active jk-home-link" aria-current="true" href="#">Queue Status</a>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a class="nav-link jk-bed-availability" href="#">Bed Availability</a>
-          </li>
+          </li>-->
           <li class="nav-item">
             <a class="nav-link jk-bed-faq " href="#">FAQ</a>
           </li>
