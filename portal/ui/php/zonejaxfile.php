@@ -84,7 +84,6 @@ $empQuery = "select * from patient where queue_name= ? ".$searchQuery ." order b
 		$stmt->close();
 
 
-
 ## Response
 $response = array(
   "draw" => intval($draw),

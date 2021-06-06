@@ -81,7 +81,6 @@ if ($pagetype == "") {
           <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> <?php echo date("d/m/Y h:i A", $_SERVER['REQUEST_TIME']); ?>
 
         </h4>
-
         <!-- card 2 patient waiting for doctors contents -->
         <div class="cs-white-cards" style="margin-top: 2%;">
           <div class="container-fluid">

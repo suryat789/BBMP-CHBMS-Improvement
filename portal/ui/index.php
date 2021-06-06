@@ -140,7 +140,7 @@
             <div class="col-md-3 col-sm-6 cs-grey-sub-cards jk-search-result" id="jk-search-result-error">
                 <div class="jk-search-response-holder">
                   <div class="jk-search-response-value">
-                  Please enter minimum 4 digit of BU/TBU No. and last 1 digit of mobile no.
+                  Please enter minimum 4 digit of BU/SRF No. and last 4 digit of mobile no.
                   </div>                
                 </div>
             </div>

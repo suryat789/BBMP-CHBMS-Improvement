@@ -51,7 +51,6 @@
             <div class="card-body">
                 <h4 class="cs-card-title">Frequently Asked Questions </h4>
 
-
                 <!-- card 2 patient waiting for doctors contents -->
                 <div class="cs-white-cards" style="margin-top: 2%;">
 

@@ -158,5 +158,4 @@
   <script src="js/scripts.js"></script>
   <!-- Scripts contents -->
 </body>
-
 </html>

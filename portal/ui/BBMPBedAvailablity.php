@@ -57,7 +57,6 @@ include('php/dbhandler.php');
       <!-- router contents -->
 
 
-
       <div class="card-body">
         <h4 class="cs-card-title cs-card-title-bed-available">Bed Availability Status
           <!-- <span class="cs-card-sub-title"><span class="jk-font-color-grey">last updated :</span> 12/04/2021

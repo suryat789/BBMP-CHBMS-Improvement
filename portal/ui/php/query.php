@@ -19,5 +19,4 @@
     $zone2 = $result2;		
 	$stmt->close();
 
-
 ?>

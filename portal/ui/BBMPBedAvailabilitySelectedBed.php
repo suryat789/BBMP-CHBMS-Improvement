@@ -52,7 +52,6 @@ if ($pagetype == "") {
 
   <div class="cs-card-body">
 
-
     <div class="card ">
       <!-- router contents -->
       <div class="card-header">

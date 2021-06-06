@@ -48,7 +48,6 @@ $stmt->close();
 $columnName = "time_added_to_queue";
 $columnSortOrder = "asc";
 
-
 if($row=="")
 {
   $row = 0;

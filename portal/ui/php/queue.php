@@ -12,7 +12,6 @@ $query1="SELECT * FROM `patient` WHERE zone='ZONE 1'";
 			$time1 = $val["time_added_to_queue"];
 	 }
 	}
-
 	//echo '<pre>';
 	//print_r($queueResult);exit;
 	$stmt->close();

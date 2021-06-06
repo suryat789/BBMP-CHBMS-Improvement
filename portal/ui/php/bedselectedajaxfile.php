@@ -33,7 +33,6 @@ $totalRecords = $resulWithoutFilter;
 $stmt->close();
 
 
-
 ## Total number of record with filtering
 $selWithFilter= "select count(*) as allcount from bed as c1,hospital as c2 where c1.type = ? and c1.hospital_id = c2.id ".$searchQuery;
 $stmt = $mysqli->prepare($selWithFilter);	
