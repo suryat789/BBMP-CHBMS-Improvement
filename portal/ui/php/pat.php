@@ -1,6 +1,6 @@
 <?php
 include('connection.php');   
-$pat = "Select DISTINCT bucode, srf_number, queue_type, t1.queue_name, t2.count, time_added_to_queue from patient t1 inner join( SELECT queue_name, count(*) as count, min(time_added_to_queue) as earliest FROM patient Where queue_type != UPPER('NONE') and queue_name != UPPER('NONE') group by queue_name ) t2 on t1.time_added_to_queue = t2.earliest and t1.queue_name = t2.queue_name order by t1.queue_name";
+$pat = "Select DISTINCT bucode, srf_number, queue_type, t1.queue_name, t2.count, time_added_to_queue from patient t1 inner join( SELECT queue_name, count(*) as count, min(time_added_to_queue) as earliest FROM patient Where queue_type != UPPER('NONE') and queue_name != UPPER('NONE') and queue_name != '0' group by queue_name ) t2 on t1.time_added_to_queue = t2.earliest and t1.queue_name = t2.queue_name order by t1.queue_name";
 $stmt = $mysqli->prepare($pat);		
 $stmt->execute();		
 $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);		
