@@ -3,7 +3,6 @@ package com.chbms.queuemgmt.data.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
@@ -33,16 +32,16 @@ public class Allotment {
     String bedType;
 
     @Column(name = "REQUEST_TIME")
-    Timestamp requestTime;
+    Instant requestTime;
 
     @Column(name = "ALLOCATION_TIME")
-    Timestamp allocationTime;
+    Instant allocationTime;
 
     @Column(name = "ZONE")
     String zone;
 
     @PrePersist
     public void prePersist() {
-        this.allocationTime = Timestamp.from(Instant.now());
+        this.allocationTime = Instant.now();
     }
 }

@@ -28,10 +28,10 @@ public class QueueEntry {
 
     @Setter
     @Column(name = "ENQUEUE_TIMESTAMP")
-    Timestamp enqueueTimestamp;
+    Instant enqueueTimestamp;
 
     @Column(name = "UPDATED_TIMESTAMP")
-    Timestamp updatedTimestamp;
+    Instant updatedTimestamp;
 
     @Setter
     @Column(name = "IS_ACTIVE")
@@ -47,6 +47,6 @@ public class QueueEntry {
 
     @PreUpdate
     public void preUpdate() {
-        this.updatedTimestamp = Timestamp.from(Instant.now());
+        this.updatedTimestamp = Instant.now();
     }
 }

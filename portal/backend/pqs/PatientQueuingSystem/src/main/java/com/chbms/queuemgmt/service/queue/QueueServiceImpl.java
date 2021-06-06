@@ -93,7 +93,7 @@ public class QueueServiceImpl implements IQueueService {
                 .type(requestedQueueType.getName())
                 .patientId(patientId)
                 .zone(zone)
-                .enqueueTimestamp(Timestamp.from(Instant.now()))
+                .enqueueTimestamp(Instant.now())
                 .pushFront(isFront ? -1 : 0)
                 .build();
 

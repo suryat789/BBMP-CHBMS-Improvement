@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 @Data
 @Builder
@@ -16,5 +16,5 @@ public class QueueStatusVO {
 
     QueueType queueType;
     Long patientRank;
-    Timestamp enqueueTimestamp;
+    Instant enqueueTimestamp;
 }
